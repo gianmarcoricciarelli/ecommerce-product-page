@@ -1,11 +1,11 @@
 <script setup lang="ts">
-    import type { CartItem } from "../../types/types";
-    import Item from "./Item/Item.vue";
+    import type { CartItem } from '../../types/types';
+    import Item from './Item/Item.vue';
 
     defineProps<{ items: CartItem[] }>();
 
     function onCheckoutButtonClickHandler(): void {
-        console.log("hello");
+        console.log('hello');
     }
 </script>
 
@@ -16,7 +16,11 @@
         </div>
         <div class="cart__content">
             <div class="content__container" v-if="items.length !== 0">
-                <Item v-for="(item, index) in items" :key="index" :item="item" />
+                <Item
+                    v-for="(item, index) in items"
+                    :key="index"
+                    :item="item"
+                />
                 <button @click="onCheckoutButtonClickHandler">Checkout</button>
             </div>
             <p v-else>Your cart is empty.</p>

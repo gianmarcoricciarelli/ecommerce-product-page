@@ -1,18 +1,20 @@
 <script setup lang="ts">
-    import type { CartItem } from "../../../types/types";
+    import type { CartItem } from '../../../types/types';
 
     defineProps<{ item: CartItem }>();
 </script>
 
 <template>
     <div class="item">
-        <img :src="item.imageUrl" />
+        <img :src="item.imageUrl" alt="shoes" />
         <div class="item__description-and-price">
             <p>{{ item.name }}</p>
             <div>
                 <p>
                     {{ `$${item.price} x ${item.quantity}` }}
-                    <span class="total_price">{{ `$${item.price * item.quantity}` }}</span>
+                    <span class="total_price">{{
+                        `$${item.price * item.quantity}`
+                    }}</span>
                 </p>
             </div>
         </div>
@@ -41,6 +43,7 @@
 
         img {
             @include width-and-height(5rem, 5rem);
+            border-radius: 0.7rem;
         }
 
         svg {
