@@ -9,7 +9,7 @@ const meta: Meta<typeof LightBox> = {
 };
 export default meta;
 
-export const DesktopLayout: StoryObj<typeof LightBox> = {
+export const Desktop: StoryObj<typeof LightBox> = {
     args: {
         images: [
             'image-product-1.jpg',
@@ -25,7 +25,7 @@ export const DesktopLayout: StoryObj<typeof LightBox> = {
         }),
     ],
 };
-export const MobileLayout: StoryObj<typeof LightBox> = {
+export const Mobile: StoryObj<typeof LightBox> = {
     parameters: {
         viewport: {
             defaultViewport: 'iphonex',

@@ -1,24 +1,24 @@
-import type { Meta, StoryObj } from "@storybook/vue3";
+import type { Meta, StoryObj } from '@storybook/vue3';
 
-import Cart from "./Cart.vue";
+import Cart from './Cart.vue';
 
 const meta: Meta<typeof Cart> = {
-    title: "Cart",
+    title: 'Cart',
     component: Cart,
     args: { items: [] },
-    tags: ["autodocs"],
+    tags: ['autodocs'],
 };
 export default meta;
 
-export const EmptyCart: StoryObj<typeof Cart> = {};
-export const FullCart: StoryObj<typeof Cart> = {
+export const Empty: StoryObj<typeof Cart> = {};
+export const Full: StoryObj<typeof Cart> = {
     args: {
         items: [
             {
-                name: "Product Name",
+                name: 'Product Name',
                 price: 100,
                 quantity: 2,
-                imageUrl: "image-product-1-thumbnail.jpg",
+                imageUrl: 'image-product-1-thumbnail.jpg',
             },
         ],
     },

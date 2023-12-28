@@ -1,25 +1,25 @@
-import type { Meta, StoryObj } from "@storybook/vue3";
+import type { Meta, StoryObj } from '@storybook/vue3';
 
-import NavigationBar from "./NavigationBar.vue";
+import NavigationBar from './NavigationBar.vue';
 
 const meta: Meta<typeof NavigationBar> = {
-    title: "Navigation Bar",
+    title: 'Navigation Bar',
     component: NavigationBar,
     args: {},
     // tags: ["autodocs"],
 };
 export default meta;
 
-export const DesktopLayout: StoryObj<typeof NavigationBar> = {
+export const Desktop: StoryObj<typeof NavigationBar> = {
     parameters: {
-        layout: "fullscreen",
+        layout: 'fullscreen',
     },
 };
-export const MobileLayout: StoryObj<typeof NavigationBar> = {
+export const Mobile: StoryObj<typeof NavigationBar> = {
     parameters: {
-        layout: "fullscreen",
+        layout: 'fullscreen',
         viewport: {
-            defaultViewport: "iphonex",
+            defaultViewport: 'iphonex',
         },
     },
 };
