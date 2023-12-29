@@ -25,6 +25,7 @@ export const Mobile: StoryObj<typeof SectionList> = {
         sections: ['Collections', 'Men', 'Women', 'About', 'Contact'],
     },
     parameters: {
+        layout: 'fullscreen',
         viewport: {
             defaultViewport: 'iphonex',
         },

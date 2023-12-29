@@ -1,18 +1,32 @@
 <script setup lang="ts">
     import { ref } from 'vue';
+    import { useDetectMobileDevice } from '../../composables/useResizeObserver';
 
-    const { sections } = defineProps<{ sections: string[] }>();
+    const { isMobile } = useDetectMobileDevice(document.body);
+
+    const { sections } = defineProps<{
+        sections: string[];
+    }>();
 
     const sectionsContainerRef = ref<HTMLDivElement>();
     const currentSectionBarRef = ref<HTMLDivElement>();
 
     const onHoverHandler = (index: number): void => {
-        const { width: sectionsContainerWidth } =
-            sectionsContainerRef.value!.getBoundingClientRect();
+        debugger;
+        const {
+            width: sectionsContainerWidth,
+            height: sectionsContainerHeight,
+        } = sectionsContainerRef.value!.getBoundingClientRect();
 
-        currentSectionBarRef.value!.style.left = `${
-            (sectionsContainerWidth / sections.length) * index
-        }px`;
+        if (!isMobile.value) {
+            currentSectionBarRef.value!.style.left = `${
+                (sectionsContainerWidth / sections.length) * index
+            }px`;
+        } else {
+            currentSectionBarRef.value!.style.top = `${
+                (sectionsContainerHeight / sections.length) * index
+            }px`;
+        }
     };
 </script>
 
@@ -21,6 +35,7 @@
         <div class="sections-list__sections" ref="sectionsContainerRef">
             <div
                 v-for="(section, index) in sections"
+                :key="index"
                 class="section-container"
                 v-on:mouseover="() => onHoverHandler(index)"
             >
@@ -81,15 +96,38 @@
 
     @media screen and (max-width: 37.5rem) {
         .sections-list {
+            @include flex-container(row, space-between, flex-start);
+
             &__sections {
                 @include flex-container(column, space-between, flex-start);
 
                 .section-container {
+                    @include width-and-height(
+                        100%,
+                        calc(100% / v-bind('sections.length'))
+                    );
+
+                    padding-left: 2rem;
+                    text-align: unset;
+
                     p {
                         color: $very-dark-blue;
                         font-weight: 700;
                     }
                 }
+            }
+
+            &__current-section-bar {
+                @include width-and-height(
+                    0.2rem,
+                    calc(100% / v-bind('sections.length'))
+                );
+
+                background-color: $orange;
+                position: absolute;
+                transition: all 300ms linear;
+                left: 0;
+                top: 0;
             }
         }
     }
