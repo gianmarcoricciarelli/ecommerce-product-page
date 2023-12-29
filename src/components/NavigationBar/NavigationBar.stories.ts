@@ -11,9 +11,9 @@ const meta: Meta<typeof NavigationBar> = {
 export default meta;
 
 export const Desktop: StoryObj<typeof NavigationBar> = {
-    parameters: {
-        layout: 'fullscreen',
-    },
+    decorators: [
+        () => ({ template: `<div style="width:750px"><story/></div>` }),
+    ],
 };
 export const Mobile: StoryObj<typeof NavigationBar> = {
     parameters: {
