@@ -1,7 +1,9 @@
 <script setup lang="ts">
     import { useDetectMobileDevice } from '../../composables/useResizeObserver';
+    import SectionsList from '../SectionsList/SectionsList.vue';
 
     const { isMobile } = useDetectMobileDevice(document.body);
+    const sections = ['Collections', 'Men', 'Women', 'About', 'Contact'];
 </script>
 
 <template>
@@ -33,13 +35,7 @@
                         />
                     </svg>
                 </div>
-                <div class="sections" v-if="!isMobile">
-                    <p>Collections</p>
-                    <p>Men</p>
-                    <p>Women</p>
-                    <p>About</p>
-                    <p>Contact</p>
-                </div>
+                <SectionsList v-if="!isMobile" :sections="sections" />
             </div>
             <div class="inner-container__cart-and-account">
                 <svg width="22" height="20" xmlns="http://www.w3.org/2000/svg">
@@ -74,20 +70,6 @@
 
                 .svg-container {
                     @include flex-container(row, flex-start, center, 1.6rem);
-                }
-
-                .sections {
-                    @include flex-container(row, flex-start, center, 3.2rem);
-
-                    p {
-                        color: $dark-grayish-blue;
-                        transition: color 300ms;
-
-                        &:hover {
-                            cursor: pointer;
-                            color: $very-dark-blue;
-                        }
-                    }
                 }
             }
 
