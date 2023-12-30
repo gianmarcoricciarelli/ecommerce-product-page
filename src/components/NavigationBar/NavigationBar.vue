@@ -46,6 +46,9 @@
                     />
                 </svg>
                 <img :src="'image-avatar.png'" />
+                <div class="items-in-cart">
+                    <p>3</p>
+                </div>
             </div>
         </div>
     </div>
@@ -83,6 +86,7 @@
                 @include flex-container(row, flex-start, flex-start, 4rem);
 
                 height: 100%;
+                position: relative;
 
                 svg {
                     color: $dark-grayish-blue;
@@ -102,6 +106,23 @@
                     &:hover {
                         cursor: pointer;
                         box-shadow: 0 0 0 0.2rem $orange;
+                    }
+                }
+
+                .items-in-cart {
+                    @include width-and-height(1.2rem, 1.2rem);
+                    @include flex-container(row, center, center);
+
+                    position: absolute;
+                    background-color: $orange;
+                    border-radius: 50%;
+                    top: -4px;
+                    left: 12px;
+
+                    p {
+                        color: $white;
+                        font-size: 8px;
+                        line-height: unset;
                     }
                 }
             }
