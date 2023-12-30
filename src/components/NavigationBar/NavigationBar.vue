@@ -47,7 +47,7 @@
                 </svg>
                 <img :src="'image-avatar.png'" />
                 <div class="items-in-cart">
-                    <p>3</p>
+                    <span>3</span>
                 </div>
             </div>
         </div>
@@ -116,10 +116,16 @@
                     position: absolute;
                     background-color: $orange;
                     border-radius: 50%;
-                    top: -4px;
-                    left: 12px;
+                    top: -0.4rem;
+                    left: 1.2rem;
+                    text-align: center;
 
-                    p {
+                    &:hover {
+                        cursor: pointer;
+                    }
+
+                    span {
+                        display: inline-block;
                         color: $white;
                         font-size: 8px;
                         line-height: unset;
@@ -148,6 +154,11 @@
 
                     img {
                         @include width-and-height(2.4rem, 2.4rem);
+                    }
+
+                    .items-in-cart {
+                        top: 2.2rem;
+                        left: 1.2rem;
                     }
                 }
             }
