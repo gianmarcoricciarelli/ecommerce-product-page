@@ -1,12 +1,10 @@
 <script setup lang="ts">
     import { ref } from 'vue';
-    import { useDetectMobileDevice } from '../../composables/useResizeObserver';
 
-    const { isMobile } = useDetectMobileDevice(document.body);
-
-    const { sections } = defineProps<{
-        sections: string[];
-    }>();
+    const { sections, isMobile } = withDefaults(
+        defineProps<{ sections: string[]; isMobile: boolean }>(),
+        { isMobile: false },
+    );
 
     const sectionsContainerRef = ref<HTMLDivElement>();
     const currentSectionBarRef = ref<HTMLDivElement>();
@@ -17,7 +15,7 @@
             height: sectionsContainerHeight,
         } = sectionsContainerRef.value!.getBoundingClientRect();
 
-        if (!isMobile.value) {
+        if (!isMobile) {
             currentSectionBarRef.value!.style.left = `${
                 (sectionsContainerWidth / sections.length) * index
             }px`;
@@ -30,12 +28,17 @@
 </script>
 
 <template>
-    <div class="sections-list">
-        <div class="sections-list__sections" ref="sectionsContainerRef">
+    <div class="sections-list" :class="{ 'sections-list-mobile': isMobile }">
+        <div
+            class="sections-list__sections"
+            :class="{ 'sections-list__sections-mobile': isMobile }"
+            ref="sectionsContainerRef"
+        >
             <div
                 v-for="(section, index) in sections"
                 :key="index"
                 class="section-container"
+                :class="{ 'section-container-mobile': isMobile }"
                 v-on:mouseover="() => onHoverHandler(index)"
             >
                 <p>{{ section }}</p>
@@ -43,6 +46,7 @@
         </div>
         <div
             class="sections-list__current-section-bar"
+            :class="{ 'sections-list__current-section-bar-mobile': isMobile }"
             ref="currentSectionBarRef"
         ></div>
     </div>
@@ -93,41 +97,39 @@
         }
     }
 
-    @media screen and (max-width: 37.5rem) {
-        .sections-list {
-            @include flex-container(row, space-between, flex-start);
+    .sections-list-mobile {
+        @include flex-container(row, space-between, flex-start);
 
-            &__sections {
-                @include flex-container(column, space-between, flex-start);
+        .sections-list__sections-mobile {
+            @include flex-container(column, space-between, flex-start);
 
-                .section-container {
-                    @include width-and-height(
-                        100%,
-                        calc(100% / v-bind('sections.length'))
-                    );
-
-                    padding-left: 2rem;
-                    text-align: unset;
-
-                    p {
-                        color: $very-dark-blue;
-                        font-weight: 700;
-                    }
-                }
-            }
-
-            &__current-section-bar {
+            .section-container-mobile {
                 @include width-and-height(
-                    0.5rem,
+                    100%,
                     calc(100% / v-bind('sections.length'))
                 );
 
-                background-color: $orange;
-                position: absolute;
-                transition: all 300ms linear;
-                left: 0;
-                top: 0;
+                padding-left: 2rem;
+                text-align: unset;
+
+                p {
+                    color: $very-dark-blue;
+                    font-weight: 700;
+                }
             }
+        }
+
+        .sections-list__current-section-bar-mobile {
+            @include width-and-height(
+                0.5rem,
+                calc(100% / v-bind('sections.length'))
+            );
+
+            background-color: $orange;
+            position: absolute;
+            transition: all 300ms linear;
+            left: 0;
+            top: 0;
         }
     }
 </style>

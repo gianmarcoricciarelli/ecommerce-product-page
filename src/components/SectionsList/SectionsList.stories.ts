@@ -12,6 +12,7 @@ export default meta;
 export const Desktop: StoryObj<typeof SectionList> = {
     args: {
         sections: ['Collections', 'Men', 'Women', 'About', 'Contact'],
+        isMobile: false,
     },
     decorators: [
         () => ({
@@ -23,6 +24,7 @@ export const Desktop: StoryObj<typeof SectionList> = {
 export const Mobile: StoryObj<typeof SectionList> = {
     args: {
         sections: ['Collections', 'Men', 'Women', 'About', 'Contact'],
+        isMobile: true,
     },
     parameters: {
         layout: 'fullscreen',
