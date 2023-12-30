@@ -10,19 +10,15 @@
     const currentSectionBarRef = ref<HTMLDivElement>();
 
     const onHoverHandler = (index: number): void => {
-        const {
-            width: sectionsContainerWidth,
-            height: sectionsContainerHeight,
-        } = sectionsContainerRef.value!.getBoundingClientRect();
+        const { width: sectionsContainerWidth } =
+            sectionsContainerRef.value!.getBoundingClientRect();
 
         if (!isMobile) {
             currentSectionBarRef.value!.style.left = `${
                 (sectionsContainerWidth / sections.length) * index
             }px`;
         } else {
-            currentSectionBarRef.value!.style.top = `${
-                (sectionsContainerHeight / sections.length) * index
-            }px`;
+            currentSectionBarRef.value!.style.top = `${60 * index}px`;
         }
     };
 </script>
@@ -99,17 +95,17 @@
 
     .sections-list-mobile {
         @include flex-container(row, space-between, flex-start);
+        height: calc(60 * v-bind('sections.length'));
 
         .sections-list__sections-mobile {
-            @include flex-container(column, space-between, flex-start);
+            @include flex-container(column, space-between, flex-start, 2rem);
 
             .section-container-mobile {
-                @include width-and-height(
-                    100%,
-                    calc(100% / v-bind('sections.length'))
-                );
+                @include width-and-height(100%, 4rem);
+                @include flex-container(row, flex-start, center);
 
-                padding-left: 2rem;
+                height: 4rem;
+                padding-left: 2.8rem;
                 text-align: unset;
 
                 p {
@@ -120,10 +116,7 @@
         }
 
         .sections-list__current-section-bar-mobile {
-            @include width-and-height(
-                0.5rem,
-                calc(100% / v-bind('sections.length'))
-            );
+            @include width-and-height(0.5rem, 4rem);
 
             background-color: $orange;
             position: absolute;
