@@ -12,7 +12,9 @@ export default meta;
 
 export const Desktop: StoryObj<typeof NavigationBar> = {
     decorators: [
-        () => ({ template: `<div style="width:750px"><story/></div>` }),
+        () => ({
+            template: `<div style="width:760px; height: 250px"><story/></div>`,
+        }),
     ],
 };
 export const Mobile: StoryObj<typeof NavigationBar> = {

@@ -12,7 +12,6 @@
     const currentSectionBarRef = ref<HTMLDivElement>();
 
     const onHoverHandler = (index: number): void => {
-        debugger;
         const {
             width: sectionsContainerWidth,
             height: sectionsContainerHeight,
@@ -83,7 +82,7 @@
         &__current-section-bar {
             @include width-and-height(
                 calc(100% / v-bind('sections.length')),
-                0.2rem
+                0.5rem
             );
 
             background-color: $orange;
@@ -119,7 +118,7 @@
 
             &__current-section-bar {
                 @include width-and-height(
-                    0.2rem,
+                    0.5rem,
                     calc(100% / v-bind('sections.length'))
                 );
 

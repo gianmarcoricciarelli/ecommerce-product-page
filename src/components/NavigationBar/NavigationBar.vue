@@ -53,28 +53,36 @@
 
 <style scoped lang="scss">
     .navigation-bar {
-        @include width-and-height(100%, 10rem);
         @include flex-container(row, flex-start, flex-start);
 
+        height: 100%;
         background-color: $white;
         border-bottom: 1px solid $grayish-blue;
 
         .inner-container {
+            @include width-and-height(100%, 100%);
             @include flex-container(row, flex-start, center);
-            width: 100%;
 
             &__navigation-and-logo {
-                @include flex-container(row, flex-start, center, 6rem);
+                @include flex-container(row, flex-start, flex-start, 4rem);
 
+                height: 100%;
                 flex-grow: 1;
 
                 .svg-container {
                     @include flex-container(row, flex-start, center, 1.6rem);
                 }
+
+                div:nth-child(2) {
+                    flex-grow: 1;
+                    max-width: 64%;
+                }
             }
 
             &__cart-and-account {
-                @include flex-container(row, flex-start, center, 4rem);
+                @include flex-container(row, flex-start, flex-start, 4rem);
+
+                height: 100%;
 
                 svg {
                     color: $dark-grayish-blue;
@@ -109,7 +117,12 @@
             border-bottom: unset;
 
             .inner-container {
+                &__navigation-and-logo {
+                    align-items: center;
+                }
+
                 &__cart-and-account {
+                    align-items: center;
                     gap: 2rem;
 
                     img {
