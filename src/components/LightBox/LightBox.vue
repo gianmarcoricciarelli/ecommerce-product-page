@@ -2,7 +2,7 @@
     import { ref } from 'vue';
     import { useDetectMobileDevice } from '../../composables/useResizeObserver';
 
-    defineProps<{ images: string[] }>();
+    const { images } = defineProps<{ images: string[] }>();
 
     const activeImage = ref(0);
     const otherImagesContainerRef = ref<Element>();
@@ -12,6 +12,13 @@
     const onClickHandler = (event: MouseEvent): void => {
         otherImagesContainerRef!.value!.querySelector('#active')!.id = '';
         (event.currentTarget as Element).id = 'active';
+    };
+    const onImgSelectorClickHandler = (nextIndex: number): void => {
+        if (nextIndex > 0 && activeImage.value + nextIndex < images.length) {
+            activeImage.value = activeImage.value + 1;
+        } else if (nextIndex < 0 && activeImage.value + nextIndex >= 0) {
+            activeImage.value = activeImage.value - 1;
+        }
     };
 </script>
 
@@ -36,13 +43,12 @@
                 <img :src="images[3]" alt="Product Image 4" />
             </div>
         </div>
-        <div class="light-box__selector--next">
-            <svg
-                width="13"
-                height="18"
-                xmlns="http://www.w3.org/2000/svg"
-                v-if="isMobile"
-            >
+        <div
+            class="light-box__selector--next"
+            v-on:click="() => onImgSelectorClickHandler(1)"
+            v-if="isMobile"
+        >
+            <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="m2 1 8 8-8 8"
                     stroke="#1D2026"
@@ -52,13 +58,12 @@
                 />
             </svg>
         </div>
-        <div class="light-box__selector--previous">
-            <svg
-                width="12"
-                height="18"
-                xmlns="http://www.w3.org/2000/svg"
-                v-if="isMobile"
-            >
+        <div
+            class="light-box__selector--previous"
+            v-on:click="() => onImgSelectorClickHandler(-1)"
+            v-if="isMobile"
+        >
+            <svg width="12" height="18" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M11 1 3 9l8 8"
                     stroke="#1D2026"
@@ -118,6 +123,13 @@
         .light-box {
             position: relative;
 
+            img {
+                &:hover {
+                    cursor: default;
+                    filter: unset;
+                }
+            }
+
             div {
                 @include width-and-height(4rem, 4rem);
                 @include flex-container();
@@ -128,9 +140,12 @@
                 transform: translate(-50%, -50%);
                 border-radius: 50%;
                 background-color: $white;
+                user-select: none;
+                transition: scale 300ms;
 
                 &:hover {
                     cursor: pointer;
+                    scale: 1.05;
                 }
             }
 
