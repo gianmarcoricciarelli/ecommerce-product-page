@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import { ref } from 'vue';
+    import gsap from 'gsap';
     import { useDetectMobileDevice } from '../../composables/useResizeObserver';
 
     const { images, isRenderedInModal } = defineProps<{
@@ -9,13 +10,42 @@
 
     const activeImage = ref(0);
     const otherImagesContainerRef = ref<Element>();
+    const activeImgIsChanging = ref(false);
 
     const { isMobile } = useDetectMobileDevice(document.body);
 
     const onClickHandler = (event: MouseEvent, index: number): void => {
-        otherImagesContainerRef!.value!.querySelector('#active')!.id = '';
-        (event.currentTarget as Element).id = 'active';
-        activeImage.value = index;
+        if (activeImgIsChanging.value) {
+            return;
+        }
+
+        const timeLine = gsap.timeline();
+
+        timeLine.to('#active-img', {
+            opacity: 0,
+            duration: 0.3,
+            onStart: () => {
+                activeImgIsChanging.value = true;
+            },
+            onComplete: () => {
+                otherImagesContainerRef!.value!.querySelector('#active')!.id =
+                    '';
+                (event.target as Element).id = 'active';
+                activeImage.value = index;
+            },
+        });
+        timeLine.to(
+            '#active-img',
+            {
+                opacity: 1,
+                delay: 0.2,
+                duration: 0.3,
+                onComplete: () => {
+                    activeImgIsChanging.value = false;
+                },
+            },
+            '>',
+        );
     };
     const onImgSelectorClickHandler = (nextIndex: number): void => {
         if (nextIndex > 0 && activeImage.value + nextIndex < images.length) {
@@ -87,12 +117,12 @@
 
         img {
             border-radius: 2rem;
-            transition: all 300ms;
+            // transition: all 300ms;
 
-            &:hover {
-                cursor: pointer;
-                filter: opacity(50%);
-            }
+            // &:hover {
+            //     cursor: pointer;
+            //     filter: opacity(50%);
+            // }
         }
 
         img:first-of-type {
@@ -108,6 +138,15 @@
                 border-radius: 2rem;
                 max-width: 20%;
                 transition: all 300ms;
+
+                img {
+                    transition: all 300ms;
+
+                    &:hover {
+                        cursor: pointer;
+                        filter: opacity(50%);
+                    }
+                }
             }
 
             #active {
