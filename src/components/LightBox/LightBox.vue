@@ -86,7 +86,7 @@
             <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="m2 1 8 8-8 8"
-                    stroke="#1D2026"
+                    stroke="currentColor"
                     stroke-width="3"
                     fill="none"
                     fill-rule="evenodd"
@@ -101,7 +101,7 @@
             <svg width="12" height="18" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M11 1 3 9l8 8"
-                    stroke="#1D2026"
+                    stroke="currentColor"
                     stroke-width="3"
                     fill="none"
                     fill-rule="evenodd"
@@ -117,12 +117,6 @@
 
         img {
             border-radius: 2rem;
-            // transition: all 300ms;
-
-            // &:hover {
-            //     cursor: pointer;
-            //     filter: opacity(50%);
-            // }
         }
 
         img:first-of-type {
@@ -184,11 +178,12 @@
                 border-radius: 50%;
                 background-color: $white;
                 user-select: none;
-                transition: scale 300ms;
+                transition: all 300ms;
 
                 &:hover {
                     cursor: pointer;
                     scale: 1.05;
+                    color: $orange;
                 }
 
                 svg {
