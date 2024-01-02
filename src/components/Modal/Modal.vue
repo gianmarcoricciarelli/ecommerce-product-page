@@ -1,18 +1,16 @@
-<script setup lang="ts">
-    defineEmits<{
-        (event: 'closingSideMenu', sideMenuIsClosed: boolean): void;
-    }>();
+<script lang="ts" setup>
+    defineEmits<{ (event: 'closingModal', modalIsClosed: boolean): void }>();
 </script>
 
 <template>
-    <div class="side-menu">
-        <div class="side-menu__panel">
-            <div class="header">
+    <div class="overlay">
+        <div class="modal">
+            <div class="modal__header">
                 <svg
                     width="14"
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
-                    @click="$emit('closingSideMenu', true)"
+                    @click="$emit('closingModal', true)"
                 >
                     <path
                         d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z"
@@ -21,44 +19,40 @@
                     />
                 </svg>
             </div>
-            <div class="content">
-                <slot></slot>
-            </div>
+            <slot></slot>
         </div>
     </div>
 </template>
 
 <style scoped lang="scss">
-    .side-menu {
+    .overlay {
         @include width-and-height(100dvw, 100dvh);
-        @include flex-container(row, flex-start, flex-start);
+        @include flex-container(column);
 
         background-color: rgba($color: $black, $alpha: 0.5);
+        position: fixed;
+        top: 0;
+        left: 0;
 
-        &__panel {
-            @include width-and-height(70%, 100%);
-            @include flex-container(column, flex-start, flex-start, 4rem);
+        .modal {
+            @include flex-container(column, center, center, 2rem);
 
-            background-color: $white;
+            max-width: 30dvw;
+            max-height: 30dvh;
 
-            .header {
+            .modal__header {
+                @include flex-container(row, flex-end);
+
                 width: 100%;
-                padding: 2.4rem 0rem 0rem 2.8rem;
 
                 svg {
-                    color: $dark-grayish-blue;
+                    color: $very-dark-blue;
                     transition: color 300ms;
 
                     &:hover {
                         color: $orange;
-                        cursor: pointer;
                     }
                 }
-            }
-
-            .content {
-                width: 100%;
-                flex-grow: 1;
             }
         }
     }
