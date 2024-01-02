@@ -26,6 +26,14 @@ export const Desktop: StoryObj<typeof LightBox> = {
     ],
 };
 export const Mobile: StoryObj<typeof LightBox> = {
+    args: {
+        images: [
+            'image-product-1.jpg',
+            'image-product-2.jpg',
+            'image-product-3.jpg',
+            'image-product-4.jpg',
+        ],
+    },
     parameters: {
         viewport: {
             defaultViewport: 'iphonex',
