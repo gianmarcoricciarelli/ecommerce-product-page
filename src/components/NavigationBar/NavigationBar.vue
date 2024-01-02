@@ -89,13 +89,10 @@
                 position: relative;
 
                 svg {
-                    color: $dark-grayish-blue;
-                    transition: color 300ms;
-
-                    &:hover {
-                        cursor: pointer;
-                        color: $very-dark-blue;
-                    }
+                    @include from-color-to-color-on-hover(
+                        $dark-grayish-blue,
+                        $very-dark-blue
+                    );
                 }
 
                 img {

@@ -47,13 +47,10 @@
         }
 
         svg {
-            color: $grayish-blue;
-            transition: color 300ms;
-
-            &:hover {
-                cursor: pointer;
-                color: $dark-grayish-blue;
-            }
+            @include from-color-to-color-on-hover(
+                $grayish-blue,
+                $dark-grayish-blue
+            );
         }
 
         &__description-and-price {

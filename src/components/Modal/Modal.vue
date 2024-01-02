@@ -46,13 +46,10 @@
                 width: 100%;
 
                 svg {
-                    color: $very-dark-blue;
-                    transition: color 300ms;
-
-                    &:hover {
-                        cursor: pointer;
-                        color: $orange;
-                    }
+                    @include from-color-to-color-on-hover(
+                        $very-dark-blue,
+                        $orange
+                    );
                 }
             }
         }

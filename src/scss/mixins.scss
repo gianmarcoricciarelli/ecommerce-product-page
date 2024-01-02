@@ -31,10 +31,21 @@
     }
 }
 
-@mixin opacity-on-hover {
+@mixin opacity-on-hover($opacity: 0.5) {
     transition: all 300ms;
 
     &:hover {
-        filter: opacity(0.5);
+        cursor: pointer;
+        filter: opacity($opacity);
+    }
+}
+
+@mixin from-color-to-color-on-hover($start-color, $end-color) {
+    color: $start-color;
+    transition: all 300ms;
+
+    &:hover {
+        cursor: pointer;
+        color: $end-color;
     }
 }

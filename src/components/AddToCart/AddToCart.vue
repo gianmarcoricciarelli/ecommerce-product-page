@@ -79,10 +79,6 @@
 
             svg {
                 @include opacity-on-hover;
-
-                &:hover {
-                    cursor: pointer;
-                }
             }
         }
 

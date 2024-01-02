@@ -46,13 +46,10 @@
                 padding: 2.4rem 0rem 0rem 2.8rem;
 
                 svg {
-                    color: $dark-grayish-blue;
-                    transition: color 300ms;
-
-                    &:hover {
-                        color: $orange;
-                        cursor: pointer;
-                    }
+                    @include from-color-to-color-on-hover(
+                        $dark-grayish-blue,
+                        $orange
+                    );
                 }
             }
 

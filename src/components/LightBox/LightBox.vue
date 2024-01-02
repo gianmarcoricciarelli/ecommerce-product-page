@@ -15,7 +15,7 @@
     const { isMobile } = useDetectMobileDevice(document.body);
 
     const onClickHandler = (event: MouseEvent, index: number): void => {
-        if (activeImgIsChanging.value) {
+        if (activeImgIsChanging.value || index === activeImage.value) {
             return;
         }
 
@@ -134,12 +134,7 @@
                 transition: all 300ms;
 
                 img {
-                    transition: all 300ms;
-
-                    &:hover {
-                        cursor: pointer;
-                        filter: opacity(50%);
-                    }
+                    @include opacity-on-hover;
                 }
             }
 

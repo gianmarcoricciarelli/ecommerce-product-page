@@ -69,18 +69,13 @@
 
                 button {
                     @include width-and-height(100%, 5.6rem);
+                    @include opacity-on-hover(70%);
 
                     border: unset;
                     border-radius: 0.7rem;
                     background-color: $orange;
                     color: $white;
                     font-weight: 700;
-                    transition: all 300ms;
-
-                    &:hover {
-                        cursor: pointer;
-                        filter: opacity(70%);
-                    }
                 }
             }
         }
