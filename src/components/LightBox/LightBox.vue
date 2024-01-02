@@ -132,7 +132,6 @@
 
             div {
                 @include width-and-height(4rem, 4rem);
-                @include flex-container();
 
                 position: absolute;
                 top: 50%;
@@ -146,6 +145,13 @@
                 &:hover {
                     cursor: pointer;
                     scale: 1.05;
+                }
+
+                svg {
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
                 }
             }
 
