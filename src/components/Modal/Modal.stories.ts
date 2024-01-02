@@ -16,6 +16,7 @@ export const Desktop: StoryObj<typeof Modal> = {
         template: `
             <Modal>
                 <LightBox
+                    :is-rendered-in-modal="true"
                     :images="[
                         'image-product-1.jpg',
                         'image-product-2.jpg',

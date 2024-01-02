@@ -2,16 +2,20 @@
     import { ref } from 'vue';
     import { useDetectMobileDevice } from '../../composables/useResizeObserver';
 
-    const { images } = defineProps<{ images: string[] }>();
+    const { images, isRenderedInModal } = defineProps<{
+        isRenderedInModal: boolean;
+        images: string[];
+    }>();
 
     const activeImage = ref(0);
     const otherImagesContainerRef = ref<Element>();
 
     const { isMobile } = useDetectMobileDevice(document.body);
 
-    const onClickHandler = (event: MouseEvent): void => {
+    const onClickHandler = (event: MouseEvent, index: number): void => {
         otherImagesContainerRef!.value!.querySelector('#active')!.id = '';
         (event.currentTarget as Element).id = 'active';
+        activeImage.value = index;
     };
     const onImgSelectorClickHandler = (nextIndex: number): void => {
         if (nextIndex > 0 && activeImage.value + nextIndex < images.length) {
@@ -24,23 +28,24 @@
 
 <template>
     <div class="light-box">
-        <img :src="images[activeImage]" alt="Active Image" id="active-img" />
+        <img
+            :src="images[activeImage]"
+            alt="Active Image"
+            id="active-img"
+            :class="{ 'reset-hover': isRenderedInModal }"
+        />
         <div
             class="light-box__other-images"
             ref="otherImagesContainerRef"
             v-if="!isMobile"
         >
-            <div id="active" v-on:click="onClickHandler">
-                <img :src="images[0]" alt="Product Image 1" />
-            </div>
-            <div v-on:click="onClickHandler">
-                <img :src="images[1]" alt="Product Image 2" />
-            </div>
-            <div v-on:click="onClickHandler">
-                <img :src="images[2]" alt="Product Image 3" />
-            </div>
-            <div v-on:click="onClickHandler">
-                <img :src="images[3]" alt="Product Image 4" />
+            <div v-for="(image, index) in images">
+                <img
+                    :id="index === 0 ? 'active' : ''"
+                    :src="image"
+                    alt="`Product Image ${index}`"
+                    @click="(event) => onClickHandler(event, index)"
+                />
             </div>
         </div>
         <div
@@ -164,6 +169,13 @@
                 bottom: 50%;
                 left: 10% !important;
             }
+        }
+    }
+
+    .reset-hover {
+        &:hover {
+            cursor: default !important;
+            filter: unset !important;
         }
     }
 </style>

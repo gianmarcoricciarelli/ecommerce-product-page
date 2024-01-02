@@ -50,6 +50,7 @@
                     transition: color 300ms;
 
                     &:hover {
+                        cursor: pointer;
                         color: $orange;
                     }
                 }
