@@ -1,11 +1,19 @@
+export interface Product {
+    name: string;
+    type: string;
+    description: string;
+    price: number;
+    discount?: number;
+}
+
 export interface Image {
-    readonly src: string;
-    readonly alt: string;
+    src: string;
+    alt: string;
 }
 
 export interface CartItem {
-    readonly name: string;
-    readonly price: number;
-    readonly quantity: number;
+    product: Product;
+    price: number;
+    quantity: number;
     image: Image;
 }
