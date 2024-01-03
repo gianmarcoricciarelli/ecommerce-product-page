@@ -6,7 +6,7 @@
 
 <template>
     <div class="item">
-        <img :src="item.imageUrl" alt="shoes" />
+        <img :src="item.image.src" :alt="item.image.alt" />
         <div class="item__description-and-price">
             <p>{{ item.name }}</p>
             <div>

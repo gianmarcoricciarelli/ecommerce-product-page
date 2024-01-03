@@ -45,7 +45,7 @@
                         fill-rule="nonzero"
                     />
                 </svg>
-                <img :src="'image-avatar.png'" />
+                <img :src="'image-avatar.png'" alt="Profile Picture" />
                 <div class="items-in-cart">
                     <span>3</span>
                 </div>

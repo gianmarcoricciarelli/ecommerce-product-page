@@ -17,12 +17,12 @@ export const Desktop: StoryObj<typeof Modal> = {
             <Modal>
                 <LightBox
                     :is-rendered-in-modal="true"
-                    :images="[
-                        'image-product-1.jpg',
-                        'image-product-2.jpg',
-                        'image-product-3.jpg',
-                        'image-product-4.jpg'
-                    ]"
+                    :images: [
+                        { src: 'image-product-1.jpg', alt: 'Product 1' },
+                        { src: 'image-product-2.jpg', alt: 'Product 2' },
+                        { src: 'image-product-3.jpg', alt: 'Product 3' },
+                        { src: 'image-product-4.jpg', alt: 'Product 4' },
+                    ],
                 />
             </Modal>
         `,

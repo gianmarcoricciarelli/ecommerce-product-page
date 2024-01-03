@@ -18,7 +18,10 @@ export const Full: StoryObj<typeof Cart> = {
                 name: 'Product Name',
                 price: 100,
                 quantity: 2,
-                imageUrl: 'image-product-1-thumbnail.jpg',
+                image: {
+                    src: 'image-product-1-thumbnail.jpg',
+                    alt: 'Cart Item',
+                },
             },
         ],
     },
