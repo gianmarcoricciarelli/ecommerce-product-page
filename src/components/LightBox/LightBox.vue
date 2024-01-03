@@ -1,11 +1,13 @@
 <script setup lang="ts">
+    import type { Image } from '../../types/types';
+
     import { ref } from 'vue';
     import gsap from 'gsap';
     import { useDetectMobileDevice } from '../../composables/useResizeObserver';
 
     const { images, isRenderedInModal } = defineProps<{
         isRenderedInModal: boolean;
-        images: string[];
+        images: Image[];
     }>();
 
     const activeImage = ref(0);
@@ -59,8 +61,8 @@
 <template>
     <div class="light-box">
         <img
-            :src="images[activeImage]"
-            alt="Active Image"
+            :src="images[activeImage].src"
+            :alt="images[activeImage].alt"
             id="active-img"
             :class="{ 'reset-hover': isRenderedInModal }"
         />
@@ -69,11 +71,11 @@
             ref="otherImagesContainerRef"
             v-if="!isMobile"
         >
-            <div v-for="(image, index) in images">
+            <div v-for="({ src, alt }, index) in images">
                 <img
                     :id="index === 0 ? 'active' : ''"
-                    :src="image"
-                    alt="`Product Image ${index}`"
+                    :src="src"
+                    :alt="alt"
                     @click="(event) => onClickHandler(event, index)"
                 />
             </div>

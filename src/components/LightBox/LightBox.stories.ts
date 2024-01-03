@@ -12,10 +12,10 @@ export default meta;
 export const Desktop: StoryObj<typeof LightBox> = {
     args: {
         images: [
-            'image-product-1.jpg',
-            'image-product-2.jpg',
-            'image-product-3.jpg',
-            'image-product-4.jpg',
+            { src: 'image-product-1.jpg', alt: 'Product 1' },
+            { src: 'image-product-2.jpg', alt: 'Product 2' },
+            { src: 'image-product-3.jpg', alt: 'Product 3' },
+            { src: 'image-product-4.jpg', alt: 'Product 4' },
         ],
     },
     decorators: [
@@ -28,10 +28,10 @@ export const Desktop: StoryObj<typeof LightBox> = {
 export const Mobile: StoryObj<typeof LightBox> = {
     args: {
         images: [
-            'image-product-1.jpg',
-            'image-product-2.jpg',
-            'image-product-3.jpg',
-            'image-product-4.jpg',
+            { src: 'image-product-1.jpg', alt: 'Product 1' },
+            { src: 'image-product-2.jpg', alt: 'Product 2' },
+            { src: 'image-product-3.jpg', alt: 'Product 3' },
+            { src: 'image-product-4.jpg', alt: 'Product 4' },
         ],
     },
     parameters: {
