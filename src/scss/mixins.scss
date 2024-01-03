@@ -31,7 +31,7 @@
     }
 }
 
-@mixin opacity-on-hover($opacity: 0.5) {
+@mixin apply-opacity-on-hover($opacity: 0.5) {
     transition: all 300ms;
 
     &:hover {
@@ -40,7 +40,7 @@
     }
 }
 
-@mixin from-color-to-color-on-hover($start-color, $end-color) {
+@mixin change-color-on-hover($start-color, $end-color) {
     color: $start-color;
     transition: all 300ms;
 

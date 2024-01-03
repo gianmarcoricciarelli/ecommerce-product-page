@@ -78,14 +78,14 @@
             }
 
             svg {
-                @include opacity-on-hover;
+                @include apply-opacity-on-hover;
             }
         }
 
         &__button {
             @include flex-container(row, center, center, 1.2rem);
             @include reset-button;
-            @include opacity-on-hover;
+            @include apply-opacity-on-hover;
 
             flex-grow: 1;
             background-color: $orange;

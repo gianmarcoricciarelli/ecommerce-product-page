@@ -47,10 +47,7 @@
         }
 
         svg {
-            @include from-color-to-color-on-hover(
-                $grayish-blue,
-                $dark-grayish-blue
-            );
+            @include change-color-on-hover($grayish-blue, $dark-grayish-blue);
         }
 
         &__description-and-price {

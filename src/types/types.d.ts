@@ -1,11 +1,11 @@
 export interface Image {
-    src: string;
-    alt: string;
+    readonly src: string;
+    readonly alt: string;
 }
 
 export interface CartItem {
-    name: string;
-    price: number;
-    quantity: number;
+    readonly name: string;
+    readonly price: number;
+    readonly quantity: number;
     image: Image;
 }

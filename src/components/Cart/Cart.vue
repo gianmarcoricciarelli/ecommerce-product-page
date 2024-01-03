@@ -69,7 +69,7 @@
 
                 button {
                     @include width-and-height(100%, 5.6rem);
-                    @include opacity-on-hover(70%);
+                    @include apply-opacity-on-hover(70%);
 
                     border: unset;
                     border-radius: 0.7rem;

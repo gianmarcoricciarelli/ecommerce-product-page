@@ -46,10 +46,7 @@
                 padding: 2.4rem 0rem 0rem 2.8rem;
 
                 svg {
-                    @include from-color-to-color-on-hover(
-                        $dark-grayish-blue,
-                        $orange
-                    );
+                    @include change-color-on-hover($dark-grayish-blue, $orange);
                 }
             }
 

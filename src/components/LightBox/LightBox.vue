@@ -136,7 +136,7 @@
                 transition: all 300ms;
 
                 img {
-                    @include opacity-on-hover;
+                    @include apply-opacity-on-hover;
                 }
             }
 

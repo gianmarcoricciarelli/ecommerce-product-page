@@ -68,7 +68,7 @@
                 text-align: center;
 
                 p {
-                    @include from-color-to-color-on-hover(
+                    @include change-color-on-hover(
                         $dark-grayish-blue,
                         $very-dark-blue
                     );

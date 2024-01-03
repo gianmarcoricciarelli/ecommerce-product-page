@@ -46,10 +46,7 @@
                 width: 100%;
 
                 svg {
-                    @include from-color-to-color-on-hover(
-                        $very-dark-blue,
-                        $orange
-                    );
+                    @include change-color-on-hover($very-dark-blue, $orange);
                 }
             }
         }
