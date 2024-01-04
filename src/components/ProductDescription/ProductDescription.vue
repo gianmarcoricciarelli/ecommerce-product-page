@@ -31,7 +31,9 @@
                             : product.price
                     }}
                 </p>
-                <p v-if="product.discount">{{ `${product.discount}%` }}</p>
+                <div class="discount-badge" v-if="product.discount">
+                    <p>{{ `${product.discount}%` }}</p>
+                </div>
             </div>
             <p v-if="product.discount">{{ product.price }}</p>
         </div>
@@ -43,7 +45,7 @@
         @include width-and-height(100%, 100%);
         @include flex-container(column, flex-start, flex-start, 2rem);
 
-        &__type {
+        &__name {
             p {
                 font-weight: 700;
                 color: $orange;
@@ -56,8 +58,33 @@
             }
         }
 
+        &__description {
+            p {
+                color: $grayish-blue;
+            }
+        }
+
         &__prince-and-discount {
-            @include flex-container(row, space-between, center);
+            @include flex-container(column, flex-start, flex-start, 2rem);
+
+            p {
+                color: $grayish-blue;
+                text-decoration-line: line-through;
+            }
+
+            .price-and-description {
+                p {
+                    color: $very-dark-blue;
+                }
+
+                .discount-badge {
+                    background-color: $pale-orange;
+
+                    p {
+                        color: $orange;
+                    }
+                }
+            }
         }
     }
 </style>
