@@ -9,6 +9,7 @@
         "preview": "vite preview",
         "storybook": "storybook dev -p 6006",
         "build-storybook": "storybook build",
+        "check-formatting": "prettier --check \"./src/**/*{.vue, .ts, .scss}\"",
         "prepare": "husky install"
     },
     "dependencies": {
