@@ -15,7 +15,12 @@ export const Full: StoryObj<typeof Cart> = {
     args: {
         items: [
             {
-                name: 'Product Name',
+                product: {
+                    name: 'Product Name',
+                    brand: 'Product Brand',
+                    description: 'Product Description',
+                    price: 100,
+                },
                 price: 100,
                 quantity: 2,
                 image: {

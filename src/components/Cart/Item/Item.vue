@@ -8,7 +8,7 @@
     <div class="item">
         <img :src="item.image.src" :alt="item.image.alt" />
         <div class="item__description-and-price">
-            <p>{{ item.name }}</p>
+            <p>{{ item.product.name }}</p>
             <div>
                 <p>
                     {{ `$${item.price} x ${item.quantity}` }}
