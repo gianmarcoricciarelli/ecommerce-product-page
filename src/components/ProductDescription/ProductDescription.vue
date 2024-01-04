@@ -11,7 +11,7 @@
 <template>
     <div class="product-description">
         <div class="product-description__brand">
-            <p>{{ product.brand.toUpperCase() }}</p>
+            <h5>{{ product.brand.toUpperCase() }}</h5>
         </div>
         <div class="product-description__name">
             <h1>{{ product.name }}</h1>
@@ -49,11 +49,9 @@
 
         background-color: $white;
 
-        &__brand {
-            p {
-                font-weight: 700;
-                color: $orange;
-            }
+        h5 {
+            font-weight: 700;
+            color: $orange;
         }
 
         &__name {
@@ -65,12 +63,11 @@
         &__description {
             p {
                 color: $dark-grayish-blue;
-                font-weight: 700;
             }
         }
 
         &__prince-and-discount {
-            @include flex-container(column, flex-start, flex-start, 2rem);
+            @include flex-container(column, flex-start, flex-start);
 
             h1 {
                 color: $very-dark-blue;
@@ -100,6 +97,14 @@
                     }
                 }
             }
+        }
+    }
+
+    @media screen and (max-width: 37.5rem) {
+        .product-description__prince-and-discount {
+            @include flex-container(row, space-between, center);
+
+            width: 100%;
         }
     }
 </style>

@@ -12,7 +12,7 @@ export default meta;
 export const Desktop: StoryObj<typeof ProductDescription> = {
     decorators: [
         () => ({
-            template: `<div style="width:440px; height: 250px"><story/></div>`,
+            template: `<div style="width:440px;"><story/></div>`,
         }),
     ],
     args: {
@@ -34,6 +34,19 @@ export const Mobile: StoryObj<typeof ProductDescription> = {
         layout: 'fullscreen',
         viewport: {
             defaultViewport: 'iphonex',
+        },
+    },
+    args: {
+        product: {
+            name: 'Fall Limited Edition Sneakers',
+            brand: 'Sneaker Company',
+            description: `
+                These low-profile sneakers are your perfect casual wear companion.
+                Featuring a durable rubber outer sole, they'll withstand everything
+                the weather can offer.
+            `,
+            price: 250,
+            discount: 50,
         },
     },
 };
