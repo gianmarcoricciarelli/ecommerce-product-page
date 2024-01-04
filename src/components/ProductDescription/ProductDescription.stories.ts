@@ -6,6 +6,7 @@ const meta: Meta<typeof ProductDescription> = {
     title: 'Product Description',
     component: ProductDescription,
     args: {},
+    tags: ['autodocs'],
 };
 export default meta;
 

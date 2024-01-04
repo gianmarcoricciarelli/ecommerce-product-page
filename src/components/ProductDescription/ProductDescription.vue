@@ -3,7 +3,7 @@
 
     defineProps<{ product: Product }>();
 
-    const getDiscountedPrice = (price: number, discount: number): number => {
+    const getDiscountedPrice = (price: number, discount: number): string => {
         return (price - (price * discount) / 100).toFixed(2);
     };
 </script>
