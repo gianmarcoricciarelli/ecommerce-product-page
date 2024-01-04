@@ -9,7 +9,7 @@
         "preview": "vite preview",
         "storybook": "storybook dev -p 6006",
         "build-storybook": "storybook build",
-        "check-formatting": "prettier --config .prettierrc --check \"./src/**/*+(.vue|.ts|.scss)\"",
+        "format": "prettier --config .prettierrc --write \"./src/**/*+(.vue|.ts|.scss|.json)\"",
         "prepare": "husky install"
     },
     "dependencies": {
