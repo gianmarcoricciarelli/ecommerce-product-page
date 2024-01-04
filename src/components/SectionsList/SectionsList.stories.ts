@@ -6,6 +6,7 @@ const meta: Meta<typeof SectionList> = {
     title: 'Sections List',
     component: SectionList,
     args: {},
+    tags: ['autodocs'],
 };
 export default meta;
 

@@ -5,7 +5,6 @@ import AddToCart from './AddToCart.vue';
 const meta: Meta<typeof AddToCart> = {
     title: 'Add To Cart',
     component: AddToCart,
-    tags: ['autodocs'],
 };
 export default meta;
 

@@ -6,7 +6,6 @@ const meta: Meta<typeof NavigationBar> = {
     title: 'Navigation Bar',
     component: NavigationBar,
     args: {},
-    // tags: ["autodocs"],
 };
 export default meta;
 
