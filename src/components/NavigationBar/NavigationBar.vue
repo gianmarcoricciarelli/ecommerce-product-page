@@ -1,8 +1,8 @@
 <script setup lang="ts">
-    import { useDetectMobileDevice } from '../../composables/useResizeObserver';
+    import { inject } from 'vue';
     import SectionsList from '../SectionsList/SectionsList.vue';
 
-    const { isMobile } = useDetectMobileDevice(document.body);
+    const isMobile = inject('isMobile');
     const sections = ['Collections', 'Men', 'Women', 'About', 'Contact'];
 </script>
 

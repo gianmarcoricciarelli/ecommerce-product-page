@@ -1,19 +1,18 @@
 <script setup lang="ts">
-    import { ref } from 'vue';
+    import { inject, ref } from 'vue';
 
-    const { sections, isMobile } = withDefaults(
-        defineProps<{ sections: string[]; isMobile: boolean }>(),
-        { isMobile: false },
-    );
+    const { sections } = defineProps<{ sections: string[] }>();
 
     const sectionsContainerRef = ref<HTMLDivElement>();
     const currentSectionBarRef = ref<HTMLDivElement>();
+
+    const isMobile = inject('isMobile');
 
     const onHoverHandler = (index: number): void => {
         const { width: sectionsContainerWidth } =
             sectionsContainerRef.value!.getBoundingClientRect();
 
-        if (!isMobile) {
+        if (isMobile === false) {
             currentSectionBarRef.value!.style.left = `${
                 (sectionsContainerWidth / sections.length) * index
             }px`;
