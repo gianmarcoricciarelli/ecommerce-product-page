@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    defineEmits<{ (event: 'closingModal', modalIsClosed: boolean): void }>();
+    defineEmits<(event: 'closingModal', modalIsClosed: boolean) => void>();
 </script>
 
 <template>

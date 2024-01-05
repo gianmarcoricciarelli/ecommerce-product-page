@@ -30,7 +30,7 @@
                 activeImgIsChanging.value = true;
             },
             onComplete: () => {
-                otherImagesContainerRef!.value!.querySelector('#active')!.id =
+                otherImagesContainerRef.value!.querySelector('#active')!.id =
                     '';
                 (event.target as Element).id = 'active';
                 activeImage.value = index;
@@ -71,7 +71,7 @@
             ref="otherImagesContainerRef"
             v-if="!isMobile"
         >
-            <div v-for="({ src, alt }, index) in images">
+            <div v-for="({ src, alt }, index) in images" :key="src">
                 <img
                     :id="index === 0 ? 'active' : ''"
                     :src="src"

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-    defineEmits<{
-        (event: 'closingSideMenu', sideMenuIsClosed: boolean): void;
-    }>();
+    defineEmits<
+        (event: 'closingSideMenu', sideMenuIsClosed: boolean) => void
+    >();
 </script>
 
 <template>
