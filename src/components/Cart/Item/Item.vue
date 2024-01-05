@@ -6,14 +6,14 @@
 
 <template>
     <div class="item">
-        <img :src="item.image.src" :alt="item.image.alt" />
+        <img :src="item.product.image.src" :alt="item.product.image.alt" />
         <div class="item__description-and-price">
             <p>{{ item.product.name }}</p>
             <div>
                 <p>
-                    {{ `$${item.price} x ${item.quantity}` }}
+                    {{ `$${item.product.price} x ${item.quantity}` }}
                     <span class="total_price">{{
-                        `$${item.price * item.quantity}`
+                        `$${item.product.price * item.quantity}`
                     }}</span>
                 </p>
             </div>
