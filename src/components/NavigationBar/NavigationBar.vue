@@ -2,11 +2,13 @@
     import type { Ref } from 'vue';
     import type { CartItem } from '../../types/types';
 
-    import { computed, inject } from 'vue';
+    import { computed, inject, watch } from 'vue';
     import SectionsList from '../SectionsList/SectionsList.vue';
+    import gsap from 'gsap';
 
     const isMobile = inject('isMobile');
     const itemsInCart: Ref<CartItem[]> | undefined = inject('itemsInCart');
+
     const sections = ['Collections', 'Men', 'Women', 'About', 'Contact'];
 
     const totalItemsInCart = computed(() => {
@@ -18,6 +20,22 @@
         }
 
         return 0;
+    });
+
+    watch(totalItemsInCart, (_, oldTotal) => {
+        const element = document.querySelector('.items-in-cart');
+
+        if (oldTotal === 0) {
+            gsap.to(element, {
+                opacity: 1,
+                top: '-0.4rem',
+                duration: 0.3,
+            });
+        } else {
+            gsap.timeline()
+                .to(element, { scale: 1.3, duration: 0.3 })
+                .to(element, { scale: 1.0, duration: 0.3 });
+        }
     });
 </script>
 
@@ -61,10 +79,7 @@
                     />
                 </svg>
                 <img :src="'image-avatar.png'" alt="Profile Picture" />
-                <div
-                    class="items-in-cart"
-                    v-if="itemsInCart !== undefined && itemsInCart.length > 0"
-                >
+                <div class="items-in-cart">
                     <span>{{ totalItemsInCart }}</span>
                 </div>
             </div>
@@ -128,10 +143,11 @@
                     @include width-and-height(1.2rem, 1.2rem);
                     @include flex-container(row, center, center);
 
+                    opacity: 0;
                     position: absolute;
                     background-color: $orange;
                     border-radius: 50%;
-                    top: -0.4rem;
+                    top: -1.2rem;
                     left: 1.2rem;
                     text-align: center;
 
