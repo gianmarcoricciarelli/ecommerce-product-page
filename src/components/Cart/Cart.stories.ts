@@ -20,13 +20,12 @@ export const Full: StoryObj<typeof Cart> = {
                     brand: 'Product Brand',
                     description: 'Product Description',
                     price: 100,
+                    image: {
+                        src: 'image-product-1-thumbnail.jpg',
+                        alt: 'Cart Item',
+                    },
                 },
-                price: 100,
                 quantity: 2,
-                image: {
-                    src: 'image-product-1-thumbnail.jpg',
-                    alt: 'Cart Item',
-                },
             },
         ],
     },

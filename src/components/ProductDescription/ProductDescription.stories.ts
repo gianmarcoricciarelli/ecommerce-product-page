@@ -27,6 +27,10 @@ export const Desktop: StoryObj<typeof ProductDescription> = {
             `,
             price: 250,
             discount: 50,
+            image: {
+                src: '',
+                alt: '',
+            },
         },
     },
 };
@@ -48,6 +52,10 @@ export const Mobile: StoryObj<typeof ProductDescription> = {
             `,
             price: 250,
             discount: 50,
+            image: {
+                src: '',
+                alt: '',
+            },
         },
     },
 };
