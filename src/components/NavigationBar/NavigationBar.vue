@@ -1,9 +1,24 @@
 <script setup lang="ts">
-    import { inject } from 'vue';
+    import type { Ref } from 'vue';
+    import type { CartItem } from '../../types/types';
+
+    import { computed, inject } from 'vue';
     import SectionsList from '../SectionsList/SectionsList.vue';
 
     const isMobile = inject('isMobile');
+    const itemsInCart: Ref<CartItem[]> | undefined = inject('itemsInCart');
     const sections = ['Collections', 'Men', 'Women', 'About', 'Contact'];
+
+    const totalItemsInCart = computed(() => {
+        if (itemsInCart?.value !== undefined) {
+            return itemsInCart.value.reduce(
+                (prev, curr) => prev + curr.quantity,
+                0,
+            );
+        }
+
+        return 0;
+    });
 </script>
 
 <template>
@@ -46,8 +61,11 @@
                     />
                 </svg>
                 <img :src="'image-avatar.png'" alt="Profile Picture" />
-                <div class="items-in-cart">
-                    <span>3</span>
+                <div
+                    class="items-in-cart"
+                    v-if="itemsInCart !== undefined && itemsInCart.length > 0"
+                >
+                    <span>{{ totalItemsInCart }}</span>
                 </div>
             </div>
         </div>

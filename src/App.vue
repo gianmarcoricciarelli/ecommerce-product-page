@@ -1,15 +1,19 @@
 <script setup lang="ts">
-    import type { Image, Product } from './types/types';
+    import type { CartItem, Image, Product } from './types/types';
 
-    import { provide } from 'vue';
+    import { provide, ref } from 'vue';
     import NavigationBar from './components/NavigationBar/NavigationBar.vue';
     import { useDetectMobileDevice } from './composables/useResizeObserver';
     import LightBox from './components/LightBox/LightBox.vue';
     import ProductDescription from './components/ProductDescription/ProductDescription.vue';
+    import AddToCart from './components/AddToCart/AddToCart.vue';
+
+    const itemsInCart = ref<CartItem[]>([]);
 
     const { isMobile } = useDetectMobileDevice(document.body);
 
     provide('isMobile', isMobile.value);
+    provide('itemsInCart', itemsInCart);
 
     const images: Image[] = [
         { src: 'image-product-1.jpg', alt: 'Product 1' },
@@ -27,6 +31,10 @@
             `,
         price: 250,
         discount: 50,
+        image: {
+            alt: 'image-product-1.jpg',
+            src: 'Product 1',
+        },
     };
 </script>
 
@@ -44,6 +52,7 @@
             </div>
             <div class="description-container">
                 <ProductDescription :product="product"></ProductDescription>
+                <AddToCart :product="product"></AddToCart>
             </div>
         </div>
     </div>
@@ -70,6 +79,8 @@
             }
 
             .description-container {
+                @include flex-container(column, flex-start, flex-start, 4rem);
+
                 width: 50%;
                 padding: 8rem 12rem;
             }
