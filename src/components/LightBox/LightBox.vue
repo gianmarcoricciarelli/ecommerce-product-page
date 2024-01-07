@@ -1,22 +1,30 @@
 <script setup lang="ts">
+    import type { Ref } from 'vue';
     import type { Image } from '../../types/types';
 
-    import { ref } from 'vue';
+    import { inject, ref } from 'vue';
     import gsap from 'gsap';
-    import { useDetectMobileDevice } from '../../composables/useResizeObserver';
 
-    const { images, activeImage, isRenderedInModal } = defineProps<{
+    const {
+        images,
+        activeImageIdx = 0,
+        isRenderedInModal = false,
+    } = defineProps<{
         images: Image[];
-        activeImage?: number;
+        activeImageIdx?: number;
         isRenderedInModal?: boolean;
     }>();
-    defineEmits<(event: 'openModal') => void>();
+    defineEmits<{
+        (event: 'openModal'): void;
+        (event: 'selectedImage', imageIndex: number): void;
+    }>();
 
-    const activeImg = ref(activeImage ?? 0);
+    console.log('activeImageIdx:', activeImageIdx);
+    const activeImg = ref(activeImageIdx);
     const otherImagesContainerRef = ref<Element>();
     const activeImgIsChanging = ref(false);
 
-    const { isMobile } = useDetectMobileDevice(document.body);
+    const isMobile: Ref<boolean> = inject('isMobile', ref(false));
 
     const onDesktopImageSelectorClickHandler = (
         event: MouseEvent,
@@ -27,8 +35,11 @@
         }
 
         const timeLine = gsap.timeline();
+        const activeImgSelector = isRenderedInModal
+            ? '.modal #active-img'
+            : '#active-img';
 
-        timeLine.to('#active-img', {
+        timeLine.to(activeImgSelector, {
             opacity: 0,
             duration: 0.3,
             onStart: () => {
@@ -42,7 +53,7 @@
             },
         });
         timeLine.to(
-            '#active-img',
+            activeImgSelector,
             {
                 opacity: 1,
                 delay: 0.2,
@@ -79,12 +90,22 @@
         >
             <div v-for="({ src, alt }, index) in images" :key="src">
                 <img
-                    :id="index === 0 ? 'active' : ''"
+                    :id="index === activeImg ? 'active' : ''"
                     :src="src"
                     :alt="alt"
                     @click="
-                        (event) =>
-                            onDesktopImageSelectorClickHandler(event, index)
+                        (event) => {
+                            const canEmit =
+                                !isMobile &&
+                                !isRenderedInModal &&
+                                !activeImgIsChanging;
+
+                            onDesktopImageSelectorClickHandler(event, index);
+
+                            if (canEmit) {
+                                $emit('selectedImage', index);
+                            }
+                        }
                     "
                 />
             </div>

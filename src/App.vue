@@ -11,6 +11,7 @@
 
     const itemsInCart = ref<CartItem[]>([]);
     const modalIsOpen = ref(false);
+    const activeImageIdx = ref(0);
 
     const { isMobile } = useDetectMobileDevice(document.body);
 
@@ -48,9 +49,12 @@
         <div class="product-section">
             <div class="lightbox-container">
                 <LightBox
-                    :images="images"
-                    :is-rendered-in-modal="false"
+                    :images="[...images]"
                     @open-modal="modalIsOpen = true"
+                    @selected-image="
+                        (selectedImageIdx) =>
+                            (activeImageIdx = selectedImageIdx)
+                    "
                 ></LightBox>
             </div>
             <div class="description-container">
@@ -64,7 +68,11 @@
             :modal-is-open="modalIsOpen"
             @closing-modal="modalIsOpen = false"
         >
-            <LightBox :images="images" :is-rendered-in-modal="true"></LightBox>
+            <LightBox
+                :images="[...images]"
+                :active-image-idx="activeImageIdx"
+                :is-rendered-in-modal="true"
+            ></LightBox>
         </Modal>
     </Teleport>
 </template>
