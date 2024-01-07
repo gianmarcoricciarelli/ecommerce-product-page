@@ -5,13 +5,14 @@
     import gsap from 'gsap';
     import { useDetectMobileDevice } from '../../composables/useResizeObserver';
 
-    const { images, isRenderedInModal } = defineProps<{
-        isRenderedInModal: boolean;
+    const { images, activeImage, isRenderedInModal } = defineProps<{
         images: Image[];
+        activeImage?: number;
+        isRenderedInModal?: boolean;
     }>();
     defineEmits<(event: 'openModal') => void>();
 
-    const activeImage = ref(0);
+    const activeImg = ref(activeImage ?? 0);
     const otherImagesContainerRef = ref<Element>();
     const activeImgIsChanging = ref(false);
 
@@ -21,7 +22,7 @@
         event: MouseEvent,
         index: number,
     ): void => {
-        if (activeImgIsChanging.value || index === activeImage.value) {
+        if (activeImgIsChanging.value || index === activeImg.value) {
             return;
         }
 
@@ -37,7 +38,7 @@
                 otherImagesContainerRef.value!.querySelector('#active')!.id =
                     '';
                 (event.target as Element).id = 'active';
-                activeImage.value = index;
+                activeImg.value = index;
             },
         });
         timeLine.to(
@@ -54,10 +55,10 @@
         );
     };
     const onMobileImgSelectorClickHandler = (nextIndex: number): void => {
-        if (nextIndex > 0 && activeImage.value + nextIndex < images.length) {
-            activeImage.value = activeImage.value + 1;
-        } else if (nextIndex < 0 && activeImage.value + nextIndex >= 0) {
-            activeImage.value = activeImage.value - 1;
+        if (nextIndex > 0 && activeImg.value + nextIndex < images.length) {
+            activeImg.value = activeImg.value + 1;
+        } else if (nextIndex < 0 && activeImg.value + nextIndex >= 0) {
+            activeImg.value = activeImg.value - 1;
         }
     };
 </script>
@@ -65,8 +66,8 @@
 <template>
     <div class="light-box">
         <img
-            :src="images[activeImage].src"
-            :alt="images[activeImage].alt"
+            :src="images[activeImg].src"
+            :alt="images[activeImg].alt"
             id="active-img"
             :class="{ 'reset-hover': isRenderedInModal }"
             @click="$emit('openModal')"
@@ -89,9 +90,9 @@
             </div>
         </div>
         <div
-            class="light-box__selector--next"
+            class="light-box__selector light-box__selector--next"
             v-on:click="() => onMobileImgSelectorClickHandler(1)"
-            v-if="isMobile"
+            v-if="isMobile || isRenderedInModal"
         >
             <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -104,9 +105,9 @@
             </svg>
         </div>
         <div
-            class="light-box__selector--previous"
+            class="light-box__selector light-box__selector--previous"
             v-on:click="() => onMobileImgSelectorClickHandler(-1)"
-            v-if="isMobile"
+            v-if="isMobile || isRenderedInModal"
         >
             <svg width="12" height="18" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -124,6 +125,8 @@
 <style scoped lang="scss">
     .light-box {
         @include flex-container(column, space-between, flex-start, 6rem);
+
+        position: relative;
 
         img {
             border-radius: 2rem;
@@ -159,6 +162,39 @@
                     }
                 }
             }
+        }
+
+        &__selector {
+            @include width-and-height(4rem, 4rem);
+
+            position: absolute;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background-color: $white;
+            user-select: none;
+            transition: all 300ms;
+
+            &:hover {
+                cursor: pointer;
+                scale: 1.05;
+                color: $orange;
+            }
+
+            svg {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        &__selector--next {
+            bottom: 55%;
+            left: 100%;
+        }
+
+        &__selector--previous {
+            bottom: 55%;
         }
     }
 
@@ -197,16 +233,6 @@
                     top: 50%;
                     transform: translate(-50%, -50%);
                 }
-            }
-
-            &__selector--next {
-                bottom: 50%;
-                left: 90% !important;
-            }
-
-            &__selector--previous {
-                bottom: 50%;
-                left: 10% !important;
             }
         }
     }
