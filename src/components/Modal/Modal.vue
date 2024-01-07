@@ -1,16 +1,18 @@
 <script lang="ts" setup>
-    defineEmits<(event: 'closingModal', modalIsClosed: boolean) => void>();
+    const { modalIsOpen } = defineProps<{ modalIsOpen: boolean }>();
+
+    defineEmits<(event: 'closingModal') => void>();
 </script>
 
 <template>
-    <div class="overlay">
+    <div class="overlay" v-if="modalIsOpen">
         <div class="modal">
             <div class="modal__header">
                 <svg
                     width="14"
                     height="15"
                     xmlns="http://www.w3.org/2000/svg"
-                    @click="$emit('closingModal', true)"
+                    @click="$emit('closingModal')"
                 >
                     <path
                         d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z"

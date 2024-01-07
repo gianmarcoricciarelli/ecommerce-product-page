@@ -4,6 +4,7 @@
     import { ref } from 'vue';
     import gsap from 'gsap';
     import { useDetectMobileDevice } from '../../composables/useResizeObserver';
+    import Modal from '../Modal/Modal.vue';
 
     const { images, isRenderedInModal } = defineProps<{
         isRenderedInModal: boolean;
@@ -13,10 +14,14 @@
     const activeImage = ref(0);
     const otherImagesContainerRef = ref<Element>();
     const activeImgIsChanging = ref(false);
+    const modalIsOpen = ref(false);
 
     const { isMobile } = useDetectMobileDevice(document.body);
 
-    const onClickHandler = (event: MouseEvent, index: number): void => {
+    const onDesktopImageSelectorClickHandler = (
+        event: MouseEvent,
+        index: number,
+    ): void => {
         if (activeImgIsChanging.value || index === activeImage.value) {
             return;
         }
@@ -49,7 +54,7 @@
             '>',
         );
     };
-    const onImgSelectorClickHandler = (nextIndex: number): void => {
+    const onMobileImgSelectorClickHandler = (nextIndex: number): void => {
         if (nextIndex > 0 && activeImage.value + nextIndex < images.length) {
             activeImage.value = activeImage.value + 1;
         } else if (nextIndex < 0 && activeImage.value + nextIndex >= 0) {
@@ -65,6 +70,7 @@
             :alt="images[activeImage].alt"
             id="active-img"
             :class="{ 'reset-hover': isRenderedInModal }"
+            @click="modalIsOpen = true"
         />
         <div
             class="light-box__other-images"
@@ -76,13 +82,16 @@
                     :id="index === 0 ? 'active' : ''"
                     :src="src"
                     :alt="alt"
-                    @click="(event) => onClickHandler(event, index)"
+                    @click="
+                        (event) =>
+                            onDesktopImageSelectorClickHandler(event, index)
+                    "
                 />
             </div>
         </div>
         <div
             class="light-box__selector--next"
-            v-on:click="() => onImgSelectorClickHandler(1)"
+            v-on:click="() => onMobileImgSelectorClickHandler(1)"
             v-if="isMobile"
         >
             <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg">
@@ -97,7 +106,7 @@
         </div>
         <div
             class="light-box__selector--previous"
-            v-on:click="() => onImgSelectorClickHandler(-1)"
+            v-on:click="() => onMobileImgSelectorClickHandler(-1)"
             v-if="isMobile"
         >
             <svg width="12" height="18" xmlns="http://www.w3.org/2000/svg">
@@ -111,6 +120,14 @@
             </svg>
         </div>
     </div>
+    <Teleport to="body">
+        <Modal
+            :modal-is-open="modalIsOpen"
+            @closing-modal="modalIsOpen = false"
+        >
+            <p>Hello</p>
+        </Modal>
+    </Teleport>
 </template>
 
 <style scoped lang="scss">
