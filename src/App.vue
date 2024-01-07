@@ -7,8 +7,10 @@
     import LightBox from './components/LightBox/LightBox.vue';
     import ProductDescription from './components/ProductDescription/ProductDescription.vue';
     import AddToCart from './components/AddToCart/AddToCart.vue';
+    import Modal from './components/Modal/Modal.vue';
 
     const itemsInCart = ref<CartItem[]>([]);
+    const modalIsOpen = ref(false);
 
     const { isMobile } = useDetectMobileDevice(document.body);
 
@@ -48,6 +50,7 @@
                 <LightBox
                     :images="images"
                     :is-rendered-in-modal="false"
+                    @open-modal="modalIsOpen = true"
                 ></LightBox>
             </div>
             <div class="description-container">
@@ -56,6 +59,14 @@
             </div>
         </div>
     </div>
+    <Teleport to="body">
+        <Modal
+            :modal-is-open="modalIsOpen"
+            @closing-modal="modalIsOpen = false"
+        >
+            <LightBox :images="images" :is-rendered-in-modal="true"></LightBox>
+        </Modal>
+    </Teleport>
 </template>
 
 <style scoped lang="scss">

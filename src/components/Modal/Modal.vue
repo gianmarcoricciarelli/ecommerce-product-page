@@ -5,7 +5,7 @@
 </script>
 
 <template>
-    <Transition name="slide-in">
+    <Transition name="fade">
         <div class="overlay" v-if="modalIsOpen">
             <div class="modal">
                 <div class="modal__header">
@@ -29,18 +29,18 @@
 </template>
 
 <style scoped lang="scss">
-    .slide-in-enter-from,
-    .slide-in-leave-to {
+    .fade-enter-from,
+    .fade-leave-to {
         opacity: 0;
     }
 
-    .slide-in-enter-active,
-    .slide-in-leave-active {
+    .fade-enter-active,
+    .fade-leave-active {
         transition: all 300ms;
     }
 
-    .slide-in-enter-to,
-    .slide-in-leave-from {
+    .fade-enter-to,
+    .fade-leave-from {
         opacity: 1;
     }
 

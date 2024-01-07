@@ -4,17 +4,16 @@
     import { ref } from 'vue';
     import gsap from 'gsap';
     import { useDetectMobileDevice } from '../../composables/useResizeObserver';
-    import Modal from '../Modal/Modal.vue';
 
     const { images, isRenderedInModal } = defineProps<{
         isRenderedInModal: boolean;
         images: Image[];
     }>();
+    defineEmits<(event: 'openModal') => void>();
 
     const activeImage = ref(0);
     const otherImagesContainerRef = ref<Element>();
     const activeImgIsChanging = ref(false);
-    const modalIsOpen = ref(false);
 
     const { isMobile } = useDetectMobileDevice(document.body);
 
@@ -70,7 +69,7 @@
             :alt="images[activeImage].alt"
             id="active-img"
             :class="{ 'reset-hover': isRenderedInModal }"
-            @click="modalIsOpen = true"
+            @click="$emit('openModal')"
         />
         <div
             class="light-box__other-images"
@@ -120,14 +119,6 @@
             </svg>
         </div>
     </div>
-    <Teleport to="body">
-        <Modal
-            :modal-is-open="modalIsOpen"
-            @closing-modal="modalIsOpen = false"
-        >
-            <p>Hello</p>
-        </Modal>
-    </Teleport>
 </template>
 
 <style scoped lang="scss">
