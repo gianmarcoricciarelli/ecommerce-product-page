@@ -71,12 +71,14 @@
 
             h1 {
                 color: $very-dark-blue;
+                user-select: none;
             }
 
             p {
                 color: $dark-grayish-blue;
                 font-weight: 700;
                 text-decoration-line: line-through;
+                user-select: none;
             }
 
             .prince-and-discount-badge {

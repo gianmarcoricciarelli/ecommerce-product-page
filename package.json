@@ -9,8 +9,12 @@
         "preview": "vite preview",
         "storybook": "storybook dev -p 6006",
         "build-storybook": "storybook build",
-        "format": "prettier --config .prettierrc --write \"./src/**/*+(.vue|.ts|.scss|.json)\"",
-        "lint": "eslint --ext .vue,.ts --config .eslintrc.json --fix src",
+        "format": "prettier --config .prettierrc --check",
+        "format-all": "format \"./src/**/*+(.vue|.ts|.scss|.json)\"",
+        "format-changed": "git diff --name-only | grep -E '.vue|.ts|.scss|.json' | xargs pnpm format",
+        "lint": "eslint --color --ext .ts,.vue --config .eslintrc.json --fix",
+        "lint-changed": "git diff --name-only | grep -E '.vue|.ts' | xargs pnpm lint",
+        "lint-all": "lint src",
         "prepare": "husky install"
     },
     "dependencies": {
