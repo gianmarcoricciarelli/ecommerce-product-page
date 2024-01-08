@@ -19,7 +19,6 @@
         (event: 'selectedImage', imageIndex: number): void;
     }>();
 
-    console.log('activeImageIdx:', activeImageIdx);
     const activeImg = ref(activeImageIdx);
     const otherImagesContainerRef = ref<Element>();
     const activeImgIsChanging = ref(false);
@@ -112,7 +111,7 @@
         </div>
         <div
             class="light-box__selector light-box__selector--next"
-            v-on:click="() => onMobileImgSelectorClickHandler(1)"
+            @click="() => onMobileImgSelectorClickHandler(1)"
             v-if="isMobile || isRenderedInModal"
         >
             <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg">
@@ -127,7 +126,7 @@
         </div>
         <div
             class="light-box__selector light-box__selector--previous"
-            v-on:click="() => onMobileImgSelectorClickHandler(-1)"
+            @click="() => onMobileImgSelectorClickHandler(-1)"
             v-if="isMobile || isRenderedInModal"
         >
             <svg width="12" height="18" xmlns="http://www.w3.org/2000/svg">
