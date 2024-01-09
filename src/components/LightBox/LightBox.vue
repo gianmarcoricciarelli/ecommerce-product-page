@@ -1,5 +1,4 @@
 <script setup lang="ts">
-    import type { Ref } from 'vue';
     import type { Image } from '../../types/types';
 
     import { inject, ref } from 'vue';
@@ -23,7 +22,7 @@
     const otherImagesContainerRef = ref<Element>();
     const activeImgIsChanging = ref(false);
 
-    const isMobile: Ref<boolean> = inject('isMobile', ref(false));
+    const isMobile: boolean = inject('isMobile', false);
 
     const onDesktopImageSelectorClickHandler = (
         event: MouseEvent,

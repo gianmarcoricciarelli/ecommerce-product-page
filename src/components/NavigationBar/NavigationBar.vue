@@ -2,9 +2,10 @@
     import type { Ref } from 'vue';
     import type { CartItem } from '../../types/types';
 
-    import { computed, inject, watch } from 'vue';
+    import { computed, inject } from 'vue';
     import SectionsList from '../SectionsList/SectionsList.vue';
-    import gsap from 'gsap';
+    import ItemsInCart from './ItemsInCart/ItemsInCart.vue';
+    // import gsap from 'gsap';
 
     const isMobile = inject('isMobile');
     const itemsInCart: Ref<CartItem[]> | undefined = inject('itemsInCart');
@@ -22,21 +23,21 @@
         return 0;
     });
 
-    watch(totalItemsInCart, (_, oldTotal) => {
-        const element = document.querySelector('.items-in-cart');
+    // watch(totalItemsInCart, (_, oldTotal) => {
+    //     const element = document.querySelector('.items-in-cart');
 
-        if (oldTotal === 0) {
-            gsap.to(element, {
-                opacity: 1,
-                top: '-0.4rem',
-                duration: 0.3,
-            });
-        } else {
-            gsap.timeline()
-                .to(element, { scale: 1.3, duration: 0.3 })
-                .to(element, { scale: 1.0, duration: 0.3 });
-        }
-    });
+    //     if (oldTotal === 0) {
+    //         gsap.to(element, {
+    //             opacity: 1,
+    //             top: '-0.4rem',
+    //             duration: 0.3,
+    //         });
+    //     } else {
+    //         gsap.timeline()
+    //             .to(element, { scale: 1.3, duration: 0.3 })
+    //             .to(element, { scale: 1.0, duration: 0.3 });
+    //     }
+    // });
 </script>
 
 <template>
@@ -79,9 +80,7 @@
                     />
                 </svg>
                 <img :src="'image-avatar.png'" alt="Profile Picture" />
-                <div class="items-in-cart">
-                    <span>{{ totalItemsInCart }}</span>
-                </div>
+                <ItemsInCart :totalItemsInCart="totalItemsInCart"></ItemsInCart>
             </div>
         </div>
     </div>
@@ -138,30 +137,6 @@
                         box-shadow: 0 0 0 0.2rem $orange;
                     }
                 }
-
-                .items-in-cart {
-                    @include width-and-height(1.2rem, 1.2rem);
-                    @include flex-container(row, center, center);
-
-                    opacity: 0;
-                    position: absolute;
-                    background-color: $orange;
-                    border-radius: 50%;
-                    top: -1.2rem;
-                    left: 1.2rem;
-                    text-align: center;
-
-                    &:hover {
-                        cursor: pointer;
-                    }
-
-                    span {
-                        display: inline-block;
-                        color: $white;
-                        font-size: 8px;
-                        line-height: unset;
-                    }
-                }
             }
         }
     }
@@ -185,11 +160,6 @@
 
                     img {
                         @include width-and-height(2.4rem, 2.4rem);
-                    }
-
-                    .items-in-cart {
-                        top: 2.2rem;
-                        left: 1.2rem;
                     }
                 }
             }
