@@ -1,8 +1,41 @@
 <script setup lang="ts">
     import type { CartItem } from '../../types/types';
-    import Item from './Item/Item.vue';
 
-    defineProps<{ items: CartItem[] }>();
+    import { onMounted, onUnmounted, ref } from 'vue';
+    import Item from './Item/Item.vue';
+    import gsap from 'gsap';
+
+    const { items } = defineProps<{
+        items: CartItem[];
+    }>();
+    const emit =
+        defineEmits<
+            (event: 'userClickedOutsideCart', isClickOutside: boolean) => void
+        >();
+
+    const cartContainerRef = ref<HTMLDivElement>();
+
+    const isClickInside = (event: MouseEvent): void => {
+        const userClickedOutsideCart =
+            event.target !== cartContainerRef.value ||
+            !cartContainerRef.value.contains(event.target as Element);
+
+        emit('userClickedOutsideCart', userClickedOutsideCart);
+    };
+
+    onMounted(() => {
+        gsap.to('.cart', {
+            opacity: 1,
+            top: '6rem',
+            duration: 0.3,
+        });
+
+        document.addEventListener('click', isClickInside);
+    });
+
+    onUnmounted(() => {
+        document.removeEventListener('click', isClickInside);
+    });
 
     function onCheckoutButtonClickHandler(): void {
         console.log('hello');
@@ -10,22 +43,26 @@
 </script>
 
 <template>
-    <div class="cart">
-        <div class="cart__header">
-            <p>Cart</p>
-        </div>
-        <div class="cart__content">
-            <div class="content__container" v-if="items.length !== 0">
-                <Item
-                    v-for="(item, index) in items"
-                    :key="index"
-                    :item="item"
-                />
-                <button @click="onCheckoutButtonClickHandler">Checkout</button>
+    <Teleport to=".inner-container__cart-and-account">
+        <div class="cart" ref="cartContainerRef">
+            <div class="cart__header">
+                <p>Cart</p>
             </div>
-            <p v-else>Your cart is empty.</p>
+            <div class="cart__content">
+                <div class="content__container" v-if="items.length !== 0">
+                    <Item
+                        v-for="(item, index) in items"
+                        :key="index"
+                        :item="item"
+                    />
+                    <button @click="onCheckoutButtonClickHandler">
+                        Checkout
+                    </button>
+                </div>
+                <p v-else>Your cart is empty.</p>
+            </div>
         </div>
-    </div>
+    </Teleport>
 </template>
 
 <style lang="scss" scoped>
@@ -36,6 +73,11 @@
         background-color: $white;
         padding: 2rem 0rem 2.8rem 0rem;
         border-radius: 0.7rem;
+        position: absolute;
+        right: 0;
+        top: 8rem;
+        box-shadow: 0px 8px 24px 0px $grayish-blue;
+        opacity: 0;
 
         &__header {
             @include width-and-height(100%, 5rem);

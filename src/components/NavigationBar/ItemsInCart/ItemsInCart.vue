@@ -39,5 +39,9 @@
             font-size: 8px;
             line-height: unset;
         }
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 </style>
