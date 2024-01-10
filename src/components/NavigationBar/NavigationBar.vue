@@ -2,10 +2,10 @@
     import type { Ref } from 'vue';
     import type { CartItem } from '../../types/types';
 
-    import { computed, inject } from 'vue';
+    import { computed, inject, watch } from 'vue';
     import SectionsList from '../SectionsList/SectionsList.vue';
     import ItemsInCart from './ItemsInCart/ItemsInCart.vue';
-    // import gsap from 'gsap';
+    import gsap from 'gsap';
 
     const isMobile = inject('isMobile');
     const itemsInCart: Ref<CartItem[]> | undefined = inject('itemsInCart');
@@ -23,21 +23,15 @@
         return 0;
     });
 
-    // watch(totalItemsInCart, (_, oldTotal) => {
-    //     const element = document.querySelector('.items-in-cart');
+    watch(totalItemsInCart, (_, oldTotal) => {
+        const element = document.querySelector('.items-in-cart');
 
-    //     if (oldTotal === 0) {
-    //         gsap.to(element, {
-    //             opacity: 1,
-    //             top: '-0.4rem',
-    //             duration: 0.3,
-    //         });
-    //     } else {
-    //         gsap.timeline()
-    //             .to(element, { scale: 1.3, duration: 0.3 })
-    //             .to(element, { scale: 1.0, duration: 0.3 });
-    //     }
-    // });
+        if (oldTotal !== 0) {
+            gsap.timeline()
+                .to(element, { scale: 1.5, duration: 0.3 })
+                .to(element, { scale: 1.0, duration: 0.3 });
+        }
+    });
 </script>
 
 <template>
