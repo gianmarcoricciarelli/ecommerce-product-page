@@ -12,6 +12,7 @@
     const itemsInCart: Ref<CartItem[]> | undefined = inject('itemsInCart');
 
     const cartIsOpen = ref(false);
+    const cartIconRef = ref<SVGElement | null>(null);
 
     const sections = ['Collections', 'Men', 'Women', 'About', 'Contact'];
 
@@ -35,6 +36,24 @@
                 .to(element, { scale: 1.0, duration: 0.3 });
         }
     });
+
+    const onUserClickSomewhereHandler = (
+        clickEvent: MouseEvent,
+        cartRef: HTMLDivElement | null,
+    ): void => {
+        if (cartRef !== null) {
+            const userClickedCartIcon =
+                clickEvent.target === cartIconRef.value ||
+                cartIconRef.value?.contains(clickEvent.target);
+            const userClickedOutsideCart =
+                clickEvent.target !== cartRef ||
+                !cartRef.contains(clickEvent.target as Element);
+
+            if (userClickedOutsideCart && !userClickedCartIcon) {
+                cartIsOpen.value = false;
+            }
+        }
+    };
 </script>
 
 <template>
@@ -73,6 +92,7 @@
                     width="22"
                     height="20"
                     xmlns="http://www.w3.org/2000/svg"
+                    ref="cartIconRef"
                     @click="() => (cartIsOpen = true)"
                 >
                     <path
@@ -83,7 +103,11 @@
                 </svg>
                 <img :src="'image-avatar.png'" alt="Profile Picture" />
                 <ItemsInCart :totalItemsInCart="totalItemsInCart"></ItemsInCart>
-                <Cart :items="itemsInCart ?? []" v-if="cartIsOpen"></Cart>
+                <Cart
+                    :items="itemsInCart ?? []"
+                    @user-clicked-somewhere="onUserClickSomewhereHandler"
+                    v-if="cartIsOpen"
+                ></Cart>
             </div>
         </div>
     </div>

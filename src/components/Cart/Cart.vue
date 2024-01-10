@@ -1,26 +1,26 @@
 <script setup lang="ts">
+    import type { Ref, UnwrapRef } from 'vue';
     import type { CartItem } from '../../types/types';
 
     import { onMounted, onUnmounted, ref } from 'vue';
     import Item from './Item/Item.vue';
     import gsap from 'gsap';
 
-    const { items } = defineProps<{
-        items: CartItem[];
-    }>();
+    const { items } = defineProps<{ items: CartItem[] }>();
+
     const emit =
         defineEmits<
-            (event: 'userClickedOutsideCart', isClickOutside: boolean) => void
+            (
+                event: 'userClickedSomewhere',
+                clickEvent: MouseEvent,
+                cartContainerRef: UnwrapRef<Ref<HTMLDivElement | null>>,
+            ) => void
         >();
 
-    const cartContainerRef = ref<HTMLDivElement>();
+    const cartContainerRef = ref<HTMLDivElement | null>(null);
 
     const isClickInside = (event: MouseEvent): void => {
-        const userClickedOutsideCart =
-            event.target !== cartContainerRef.value ||
-            !cartContainerRef.value.contains(event.target as Element);
-
-        emit('userClickedOutsideCart', userClickedOutsideCart);
+        emit('userClickedSomewhere', event, cartContainerRef.value);
     };
 
     onMounted(() => {
