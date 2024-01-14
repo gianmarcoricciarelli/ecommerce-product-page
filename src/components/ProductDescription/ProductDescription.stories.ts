@@ -18,6 +18,7 @@ export const Desktop: StoryObj<typeof ProductDescription> = {
     ],
     args: {
         product: {
+            id: 1,
             name: 'Fall Limited Edition Sneakers',
             brand: 'Sneaker Company',
             description: `
@@ -43,6 +44,7 @@ export const Mobile: StoryObj<typeof ProductDescription> = {
     },
     args: {
         product: {
+            id: 1,
             name: 'Fall Limited Edition Sneakers',
             brand: 'Sneaker Company',
             description: `

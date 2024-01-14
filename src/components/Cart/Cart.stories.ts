@@ -16,6 +16,7 @@ export const Full: StoryObj<typeof Cart> = {
         items: [
             {
                 product: {
+                    id: 1,
                     name: 'Product Name',
                     brand: 'Product Brand',
                     description: 'Product Description',
