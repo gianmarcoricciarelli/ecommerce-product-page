@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import type { CartItem } from '../../types/types';
 
+    import { onMounted, onUnmounted } from 'vue';
     import Item from './Item/Item.vue';
 
     const props = defineProps<{
@@ -8,9 +9,29 @@
         cartIsOpen: boolean;
     }>();
 
+    const emit =
+        defineEmits<
+            (
+                event: 'clickOnDomElement',
+                clickedElement: EventTarget | null,
+            ) => void
+        >();
+
     function onCheckoutButtonClickHandler(): void {
-        console.log('hello');
+        console.log('CHECKOUT');
     }
+
+    const onDomClickHandler = (event: MouseEvent): void => {
+        emit('clickOnDomElement', event.target);
+    };
+
+    onMounted(() => {
+        document.addEventListener('click', onDomClickHandler);
+    });
+
+    onUnmounted(() => {
+        document.removeEventListener('click', onDomClickHandler);
+    });
 </script>
 
 <template>
