@@ -2,12 +2,12 @@
     import type { CartItem, Image, Product } from './types/types';
 
     import { provide, ref } from 'vue';
-    import NavigationBar from './components/NavigationBar/NavigationBar.vue';
-    import { useDetectMobileDevice } from './composables/useResizeObserver';
-    import LightBox from './components/LightBox/LightBox.vue';
-    import ProductDescription from './components/ProductDescription/ProductDescription.vue';
     import AddToCart from './components/AddToCart/AddToCart.vue';
+    import LightBox from './components/LightBox/LightBox.vue';
     import Modal from './components/Modal/Modal.vue';
+    import NavigationBar from './components/NavigationBar/NavigationBar.vue';
+    import ProductDescription from './components/ProductDescription/ProductDescription.vue';
+    import { useDetectMobileDevice } from './composables/useResizeObserver';
 
     const itemsInCart = ref<CartItem[]>([]);
     const modalIsOpen = ref(false);
@@ -80,7 +80,7 @@
 
 <style scoped lang="scss">
     .ecommerce {
-        @include width-and-height(100dvw, 100dvh);
+        @include width-and-height(100%, 100%);
 
         padding: 8rem 16rem;
 
@@ -89,13 +89,13 @@
         }
 
         .product-section {
+            @include width-and-height(100%, 100%);
             @include flex-container(row, flex-start, flex-start);
 
-            width: 100%;
             padding: 12rem 8rem;
 
             .lightbox-container {
-                width: 50%;
+                @include width-and-height(50%, 100%);
             }
 
             .description-container {

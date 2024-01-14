@@ -1,8 +1,8 @@
 <script setup lang="ts">
     import type { Image } from '../../types/types';
 
-    import { inject, ref } from 'vue';
     import gsap from 'gsap';
+    import { inject, ref } from 'vue';
 
     const {
         images,
@@ -145,6 +145,7 @@
     .light-box {
         @include flex-container(column, space-between, flex-start, 6rem);
 
+        height: 100%;
         position: relative;
 
         img {

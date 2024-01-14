@@ -19,7 +19,7 @@ html {
 body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
-    font-family: "Kumbh Sans", sans-serif;
+    font-family: 'Kumbh Sans', sans-serif;
     font-size: 1.6rem;
 }
 
@@ -52,4 +52,9 @@ h6 {
 #root,
 #__next {
     isolation: isolate;
+}
+
+#app {
+    height: 100dvh;
+    width: 100dvw;
 }
