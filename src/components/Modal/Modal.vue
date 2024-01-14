@@ -56,8 +56,8 @@
         .modal {
             @include flex-container(column, center, center, 2rem);
 
-            max-width: 30dvw;
-            max-height: 30dvh;
+            max-width: 50%;
+            max-height: 75%;
 
             .modal__header {
                 @include flex-container(row, flex-end);

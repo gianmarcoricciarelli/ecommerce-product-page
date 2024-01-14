@@ -78,11 +78,15 @@
             :src="images[activeImg].src"
             :alt="images[activeImg].alt"
             id="active-img"
-            :class="{ 'reset-hover': isRenderedInModal }"
+            :class="{
+                'reset-hover': isRenderedInModal,
+                'active-img-width-modal': isRenderedInModal,
+            }"
             @click="$emit('openModal')"
         />
         <div
             class="light-box__other-images"
+            :class="{ 'light-box__other-images-modal': isRenderedInModal }"
             ref="otherImagesContainerRef"
             v-if="!isMobile"
         >
@@ -143,7 +147,7 @@
 
 <style scoped lang="scss">
     .light-box {
-        @include flex-container(column, space-between, flex-start, 6rem);
+        @include flex-container(column, flex-start, center, 6rem);
 
         height: 100%;
         position: relative;
@@ -152,8 +156,8 @@
             border-radius: 2rem;
         }
 
-        img:first-of-type {
-            width: 100%;
+        #active-img {
+            width: 55%;
         }
 
         &__other-images {
@@ -210,11 +214,12 @@
 
         &__selector--next {
             bottom: 55%;
-            left: 100%;
+            left: 70%;
         }
 
         &__selector--previous {
             bottom: 55%;
+            left: 30%;
         }
     }
 
@@ -255,6 +260,14 @@
                 }
             }
         }
+    }
+
+    .active-img-width-modal {
+        width: 40% !important;
+    }
+
+    .light-box__other-images-modal {
+        width: 50% !important;
     }
 
     .reset-hover {
