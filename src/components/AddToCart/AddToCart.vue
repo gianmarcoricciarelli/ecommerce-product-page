@@ -16,11 +16,19 @@
         }
     };
     const addToCart = (): void => {
-        if (itemsInCart !== undefined && quantity.value !== 0) {
-            itemsInCart.value = [
-                ...itemsInCart.value,
-                { product, quantity: quantity.value },
-            ];
+        if (quantity.value !== 0) {
+            const itemToUpdate = itemsInCart.value.find(
+                (i) => i.product.id === product.id,
+            );
+
+            if (itemToUpdate !== undefined) {
+                itemToUpdate.quantity += quantity.value;
+            } else {
+                itemsInCart.value = [
+                    ...itemsInCart.value,
+                    { product, quantity: quantity.value },
+                ];
+            }
         }
     };
 </script>
