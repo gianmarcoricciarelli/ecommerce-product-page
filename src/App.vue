@@ -25,6 +25,7 @@
         { src: 'image-product-4.jpg', alt: 'Product 4' },
     ];
     const product: Product = {
+        id: 1,
         name: 'Fall Limited Edition Sneakers',
         brand: 'Sneaker Company',
         description: `
@@ -35,8 +36,8 @@
         price: 250,
         discount: 50,
         image: {
-            alt: 'image-product-1.jpg',
-            src: 'Product 1',
+            alt: 'Product 1',
+            src: 'image-product-1.jpg',
         },
     };
 </script>

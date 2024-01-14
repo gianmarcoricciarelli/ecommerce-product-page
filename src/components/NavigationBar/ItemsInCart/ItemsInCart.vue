@@ -11,14 +11,16 @@
 </template>
 
 <style scoped lang="scss">
-    .v-enter-from {
+    .v-enter-from,
+    .v-leave-to {
         opacity: 0;
         transform: translateY(-1.2rem);
     }
 
-    .v-enter-to {
+    .v-enter-to,
+    .v-leave-from {
         opacity: 1;
-        transform: translateY(-0.4rem);
+        transform: translateY(-0.8rem);
     }
 
     .items-in-cart {

@@ -1,7 +1,18 @@
 <script setup lang="ts">
+    import type { Ref } from 'vue';
     import type { CartItem } from '../../../types/types';
 
-    defineProps<{ item: CartItem }>();
+    import { inject, ref } from 'vue';
+
+    const { item } = defineProps<{ item: CartItem }>();
+
+    const itemsInCart = inject<Ref<CartItem[]>>('itemsInCart', ref([]));
+
+    const onTrashIconClick = (): void => {
+        itemsInCart.value = itemsInCart.value.filter(
+            (itemInCart) => itemInCart.product.id !== item.product.id,
+        );
+    };
 </script>
 
 <template>
@@ -23,6 +34,7 @@
             height="16"
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
+            @click="onTrashIconClick"
         >
             <defs>
                 <path

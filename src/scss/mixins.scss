@@ -31,8 +31,12 @@
     }
 }
 
+@mixin add-transition($transition: all, $transition-time: 300ms) {
+    transition: $transition $transition-time;
+}
+
 @mixin apply-opacity-on-hover($opacity: 0.5) {
-    transition: all 300ms;
+    @include add-transition;
 
     &:hover {
         cursor: pointer;
@@ -41,8 +45,9 @@
 }
 
 @mixin change-color-on-hover($start-color, $end-color) {
+    @include add-transition(color);
+
     color: $start-color;
-    transition: all 300ms;
 
     &:hover {
         cursor: pointer;
