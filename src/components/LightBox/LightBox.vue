@@ -86,7 +86,6 @@
         />
         <div
             class="light-box__other-images"
-            :class="{ 'light-box__other-images-modal': isRenderedInModal }"
             ref="otherImagesContainerRef"
             v-if="!isMobile"
         >
@@ -153,11 +152,10 @@
         position: relative;
 
         img {
+            @include width-and-height(100%, 100%);
+            object-fit: cover;
+            overflow: hidden;
             border-radius: 2rem;
-        }
-
-        #active-img {
-            width: 55%;
         }
 
         &__other-images {
@@ -214,12 +212,12 @@
 
         &__selector--next {
             bottom: 55%;
-            left: 70%;
+            left: 100%;
         }
 
         &__selector--previous {
             bottom: 55%;
-            left: 30%;
+            left: 0%;
         }
     }
 
@@ -260,14 +258,6 @@
                 }
             }
         }
-    }
-
-    .active-img-width-modal {
-        width: 40% !important;
-    }
-
-    .light-box__other-images-modal {
-        width: 50% !important;
     }
 
     .reset-hover {
