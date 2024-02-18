@@ -46,4 +46,10 @@
             cursor: pointer;
         }
     }
+
+    @media screen and (max-width: 37.5rem) {
+        .items-in-cart {
+            top: 2rem;
+        }
+    }
 </style>

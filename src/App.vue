@@ -45,7 +45,7 @@
 <template>
     <div class="ecommerce">
         <div class="navbar-container">
-            <NavigationBar></NavigationBar>
+            <NavigationBar />
         </div>
         <div class="product-section">
             <div class="lightbox-container">
@@ -56,11 +56,11 @@
                         (selectedImageIdx) =>
                             (activeImageIdx = selectedImageIdx)
                     "
-                ></LightBox>
+                />
             </div>
             <div class="description-container">
-                <ProductDescription :product="product"></ProductDescription>
-                <AddToCart :product="product"></AddToCart>
+                <ProductDescription :product="product" />
+                <AddToCart :product="product" />
             </div>
         </div>
     </div>
@@ -73,7 +73,7 @@
                 :images="[...images]"
                 :active-image-idx="activeImageIdx"
                 :is-rendered-in-modal="true"
-            ></LightBox>
+            />
         </Modal>
     </Teleport>
 </template>
@@ -118,6 +118,11 @@
 
                 .lightbox-container {
                     @include width-and-height(100%);
+                }
+
+                .description-container {
+                    width: 100%;
+                    padding: 0rem 2.4rem;
                 }
             }
         }
