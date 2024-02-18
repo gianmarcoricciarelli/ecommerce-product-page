@@ -124,4 +124,12 @@
             }
         }
     }
+
+    @media screen and (max-width: 37.5rem) {
+        .cart {
+            right: unset;
+            left: 50%;
+            transform: translateX(-90%);
+        }
+    }
 </style>
