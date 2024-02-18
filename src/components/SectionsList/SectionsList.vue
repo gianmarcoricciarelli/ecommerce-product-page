@@ -45,7 +45,7 @@
             class="sections-list__current-section-bar"
             :class="{ 'sections-list__current-section-bar-mobile': isMobile }"
             ref="currentSectionBarRef"
-        ></div>
+        />
     </div>
 </template>
 

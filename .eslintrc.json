@@ -10,12 +10,12 @@
     ],
     "parserOptions": {
         "ecmaVersion": "latest",
-        "sourceType": "module",
-        "project": "./tsconfig.json",
-        "parser": "@typescript-eslint/parser",
         "extraFileExtensions": [
             "vue"
-        ]
+        ],
+        "parser": "@typescript-eslint/parser",
+        "project": "./tsconfig.json",
+        "sourceType": "module"
     },
     "plugins": [
         "vue"
@@ -23,6 +23,14 @@
     "rules": {
         "@typescript-eslint/no-non-null-assertion": "warn",
         "prettier/prettier": "error",
+        "vue/html-self-closing": [
+            "error",
+            {
+                "html": {
+                    "void": "always"
+                }
+            }
+        ],
         "vue/multi-word-component-names": "off"
     }
 }

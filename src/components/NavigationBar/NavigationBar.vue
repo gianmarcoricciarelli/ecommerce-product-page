@@ -7,12 +7,14 @@
     import Cart from '../Cart/Cart.vue';
     import SectionsList from '../SectionsList/SectionsList.vue';
     import ItemsInCart from './ItemsInCart/ItemsInCart.vue';
+    import SideMenu from '../SideMenu/SideMenu.vue';
 
     const isMobile = inject<Ref<boolean>>('isMobile');
     const itemsInCart: Ref<CartItem[]> | undefined = inject('itemsInCart');
 
     const cartIsOpen = ref(false);
     const cartIconRef = ref<SVGElement | null>(null);
+    const sideMenuIsOpen = ref(false);
 
     const sections = ['Collections', 'Men', 'Women', 'About', 'Contact'];
 
@@ -83,6 +85,7 @@
                         height="15"
                         xmlns="http://www.w3.org/2000/svg"
                         v-if="isMobile"
+                        @click="sideMenuIsOpen = true"
                     >
                         <path
                             d="M16 12v3H0v-3h16Zm0-6v3H0V6h16Zm0-6v3H0V0h16Z"
@@ -118,15 +121,18 @@
                     />
                 </svg>
                 <img :src="'image-avatar.png'" alt="Profile Picture" />
-                <ItemsInCart :totalItemsInCart="totalItemsInCart"></ItemsInCart>
+                <ItemsInCart :totalItemsInCart="totalItemsInCart" />
                 <Cart
                     :cart-is-open="cartIsOpen"
                     :items="itemsInCart ?? []"
                     @click-on-dom-element="onClickOnDomElementHandler"
-                ></Cart>
+                />
             </div>
         </div>
     </div>
+    <SideMenu v-if="sideMenuIsOpen" @closing-side-menu="sideMenuIsOpen = false">
+        <SectionsList :sections="sections" />
+    </SideMenu>
 </template>
 
 <style scoped lang="scss">

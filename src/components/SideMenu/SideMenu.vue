@@ -22,7 +22,7 @@
                 </svg>
             </div>
             <div class="content">
-                <slot></slot>
+                <slot />
             </div>
         </div>
     </div>
