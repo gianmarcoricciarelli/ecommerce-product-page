@@ -15,7 +15,7 @@
 
     const { isMobile } = useDetectMobileDevice(document.body);
 
-    provide('isMobile', isMobile.value);
+    provide('isMobile', isMobile);
     provide('itemsInCart', itemsInCart);
 
     const images: Image[] = [
@@ -103,6 +103,22 @@
 
                 width: 50%;
                 padding: 8rem 12rem;
+            }
+        }
+    }
+
+    @media screen and (max-width: 37.5rem) {
+        .ecommerce {
+            padding: unset;
+
+            .product-section {
+                @include flex-container(column);
+
+                padding: unset;
+
+                .lightbox-container {
+                    @include width-and-height(100%);
+                }
             }
         }
     }

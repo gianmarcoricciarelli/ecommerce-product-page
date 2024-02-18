@@ -8,7 +8,7 @@
     import SectionsList from '../SectionsList/SectionsList.vue';
     import ItemsInCart from './ItemsInCart/ItemsInCart.vue';
 
-    const isMobile = inject('isMobile');
+    const isMobile = inject<Ref<boolean>>('isMobile');
     const itemsInCart: Ref<CartItem[]> | undefined = inject('itemsInCart');
 
     const cartIsOpen = ref(false);
