@@ -130,7 +130,10 @@
             </div>
         </div>
     </div>
-    <SideMenu v-if="sideMenuIsOpen" @closing-side-menu="sideMenuIsOpen = false">
+    <SideMenu
+        :is-open="sideMenuIsOpen"
+        @closing-side-menu="sideMenuIsOpen = false"
+    >
         <SectionsList :sections="sections" />
     </SideMenu>
 </template>
