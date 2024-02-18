@@ -1,4 +1,5 @@
 <script setup lang="ts">
+    import type { Ref } from 'vue';
     import type { Image } from '../../types/types';
 
     import gsap from 'gsap';
@@ -22,7 +23,7 @@
     const otherImagesContainerRef = ref<Element>();
     const activeImgIsChanging = ref(false);
 
-    const isMobile: boolean = inject('isMobile', false);
+    const isMobile = inject<Ref<boolean>>('isMobile');
 
     const onDesktopImageSelectorClickHandler = (
         event: MouseEvent,
@@ -226,36 +227,22 @@
             position: relative;
 
             img {
+                border-radius: unset;
+
                 &:hover {
                     cursor: default;
                     filter: unset;
                 }
             }
 
-            div {
-                @include width-and-height(4rem, 4rem);
+            &__selector--next {
+                bottom: 45%;
+                left: 90%;
+            }
 
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                border-radius: 50%;
-                background-color: $white;
-                user-select: none;
-                transition: all 300ms;
-
-                &:hover {
-                    cursor: pointer;
-                    scale: 1.05;
-                    color: $orange;
-                }
-
-                svg {
-                    position: absolute;
-                    left: 50%;
-                    top: 50%;
-                    transform: translate(-50%, -50%);
-                }
+            &__selector--previous {
+                bottom: 45%;
+                left: 10%;
             }
         }
     }

@@ -114,15 +114,17 @@
             .product-section {
                 @include flex-container(column);
 
+                height: unset;
                 padding: unset;
 
                 .lightbox-container {
-                    @include width-and-height(100%);
+                    width: 100%;
+                    height: unset;
                 }
 
                 .description-container {
                     width: 100%;
-                    padding: 0rem 2.4rem;
+                    padding: 2.4rem;
                 }
             }
         }
