@@ -14,7 +14,7 @@
         activeImageIdx?: number;
         isRenderedInModal?: boolean;
     }>();
-    defineEmits<{
+    const emit = defineEmits<{
         (event: 'openModal'): void;
         (event: 'selectedImage', imageIndex: number): void;
     }>();
@@ -25,6 +25,13 @@
 
     const isMobile = inject<Ref<boolean>>('isMobile');
 
+    const onLightBoxClickHandler = (): void => {
+        if (isMobile !== undefined && isMobile?.value) {
+            return;
+        }
+
+        emit('openModal');
+    };
     const onDesktopImageSelectorClickHandler = (
         event: MouseEvent,
         index: number,
@@ -83,7 +90,7 @@
                 'reset-hover': isRenderedInModal,
                 'active-img-width-modal': isRenderedInModal,
             }"
-            @click="$emit('openModal')"
+            @click="onLightBoxClickHandler"
         />
         <div
             class="light-box__other-images"
