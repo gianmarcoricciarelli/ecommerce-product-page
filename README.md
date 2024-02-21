@@ -2,7 +2,7 @@
 
 This is my implementation for Frontend Mentor's [E-commerce Product Page](https://www.frontendmentor.io/challenges/ecommerce-product-page-UPsZ9MJp6) challenge.
 
-As requested by the challenge, the page can be experienced both on a desktop and a mobile environment 🧑‍💻.
+As requested by the challenge, the page can be experienced both on a desktop 🧑‍💻 and a mobile 📱 environment.
 
 ### My Stack
 
