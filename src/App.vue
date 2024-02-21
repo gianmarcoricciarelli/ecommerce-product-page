@@ -111,6 +111,11 @@
         .ecommerce {
             padding: unset;
 
+            .navbar-container {
+                position: fixed;
+                z-index: 1;
+            }
+
             .product-section {
                 @include flex-container(column);
 
